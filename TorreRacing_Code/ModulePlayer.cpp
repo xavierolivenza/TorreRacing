@@ -163,7 +163,6 @@ update_status ModulePlayer::Update(float dt)
 
 	turn = acceleration = brake = 0.0f;
 
-	/*
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		acceleration = MAX_ACCELERATION;
@@ -186,11 +185,44 @@ update_status ModulePlayer::Update(float dt)
 		acceleration = -MAX_ACCELERATION;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
 	{
 		brake = BRAKE_POWER;
 	}
-	*/
+
+	//Left dash
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
+	{
+
+	}
+
+	//Right dash
+	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
+	{
+
+	}
+	
+	//Front dash
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
+	{
+		float impulse = 100.0f;
+		btQuaternion impulse_quaternion(impulse, 0.0f, 0.0f, 0.0f);
+		
+		btTransform* vehicle_bt_transform = vehicle->GetBTTransform();
+		btQuaternion vehicle_rotation_quaternion = vehicle_bt_transform->getRotation();
+		btQuaternion vehicle_quaternion_conj(-vehicle_rotation_quaternion.getX(), -vehicle_rotation_quaternion.getY(), -vehicle_rotation_quaternion.getZ(), vehicle_rotation_quaternion.getW());
+		
+ 		vehicle_rotation_quaternion *= impulse_quaternion;
+		vehicle_rotation_quaternion *= vehicle_quaternion_conj;
+
+		vehicle->Push(vehicle_rotation_quaternion.getZ(), vehicle_rotation_quaternion.getY(), vehicle_rotation_quaternion.getX());
+	}
+
+	//Jump
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		vehicle->Push(0.0f, 10000.0f, 0.0f);
+	}
 
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);

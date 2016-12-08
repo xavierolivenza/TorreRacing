@@ -21,12 +21,13 @@ bool ModuleSceneIntro::Start()
 	App->camera->LookAt(vec3(0, 0, 0));
 
 
+	/*
 	cube1.size.x = 10;
 	cube1.size.y = 10;
 	cube1.size.z = 10;
 	cube1body = App->physics->AddBody(cube1, 500);
 	cube1body->SetPos(0, 0, 0);
-
+	*/
 
 	return ret;
 }
@@ -47,8 +48,8 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 	//--------------------------------------------//
-	cube1body->GetTransform(&cube1.transform);
-	cube1.Render();
+	//cube1body->GetTransform(&cube1.transform);
+	//cube1.Render();
 	//--------------------------------------------//
 
 	return UPDATE_CONTINUE;

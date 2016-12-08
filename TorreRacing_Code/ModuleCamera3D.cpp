@@ -108,7 +108,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 
 	// Camera follow car
-	/*
+	
 	else
 	{
 		mat4x4 vehicle_trans;
@@ -123,7 +123,6 @@ update_status ModuleCamera3D::Update(float dt)
 		VehiclePos = vehicle_trans.translation();
 		App->camera->Look((VehiclePos + CameraPos) - Z * 10, ViewDirection + VehiclePos, true);
 	}
-	*/
 
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
