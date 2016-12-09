@@ -26,6 +26,8 @@ public:
 	float acceleration;
 	float brake;
 
+	Timer jump_coolddown;
+
 private:
 	btVector3 vehicle_origin_axis;
 

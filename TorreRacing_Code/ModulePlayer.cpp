@@ -8,6 +8,7 @@
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
+	jump_coolddown.Start();
 }
 
 ModulePlayer::~ModulePlayer()
@@ -205,7 +206,7 @@ update_status ModulePlayer::Update(float dt)
 	//Front dash
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
 	{
-		float impulse = 100.0f;
+		float impulse = 1000.0f;
 		btQuaternion impulse_quaternion(impulse, 0.0f, 0.0f, 0.0f);
 		
 		btTransform* vehicle_bt_transform = vehicle->GetBTTransform();
@@ -221,7 +222,11 @@ update_status ModulePlayer::Update(float dt)
 	//Jump
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		vehicle->Push(0.0f, 10000.0f, 0.0f);
+		if ((jump_coolddown.Read() * 0.001) >= 2.0f)
+		{
+			vehicle->Push(0.0f, 5000.0f, 0.0f);
+			jump_coolddown.Start();
+		}
 	}
 
 	vehicle->ApplyEngineForce(acceleration);
@@ -230,8 +235,12 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->Render();
 
+	float jump_cooldown_calc = 2.0f - jump_coolddown.Read() * 0.001;
+	if (jump_cooldown_calc < 0)
+		jump_cooldown_calc = 0;
+
 	char title[80];
-	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
+	sprintf_s(title, "TorreRacing, Vehicle velocity: %.1f Km/h, JumpCooldown: %.2f", vehicle->GetKmh(), jump_cooldown_calc);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
