@@ -5,6 +5,11 @@
 #include "PhysVehicle3D.h"
 #include "PhysBody3D.h"
 
+#define FRONT_IMPULSE 10000.0f
+#define LATERAL_IMPULSE 5000.0f
+
+#define JUMP_COOLDOWN 3.0f
+
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
@@ -213,93 +218,87 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	//Left dash
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 	{
+		vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
+		mat4x4 vehicle_trans;
+		vehicle->GetTransform(&vehicle_trans);
 
+		//Vehicle Axis
+		vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+		//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+		vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+
+		//Vehicle pos and camera look to it
+		vec3 VehiclePos = vehicle_trans.translation();
+		vec3 Position = (VehiclePos)  + X * LATERAL_IMPULSE;
+		vec3 Reference = ViewDirection + VehiclePos;
+
+		//Z = normalize(Position + Reference);
+		X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+		//Y = cross(Z, X);
+
+		Position += Z * 0.05f;
+
+		vehicle->Push((Position.x - VehiclePos.x), (Position.y - VehiclePos.y), (Position.z - VehiclePos.z));
 	}
 
 	//Right dash
-	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
+		vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
+		mat4x4 vehicle_trans;
+		vehicle->GetTransform(&vehicle_trans);
 
+		//Vehicle Axis
+		vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+		//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+		vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+
+		//Vehicle pos and camera look to it
+		vec3 VehiclePos = vehicle_trans.translation();
+		vec3 Position = (VehiclePos) - X * LATERAL_IMPULSE;
+		vec3 Reference = ViewDirection + VehiclePos;
+
+		//Z = normalize(Position + Reference);
+		X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+		//Y = cross(Z, X);
+
+		Position += Z * 0.05f;
+
+		vehicle->Push((Position.x - VehiclePos.x), (Position.y - VehiclePos.y), (Position.z - VehiclePos.z));
 	}
 	
-
-
-	//------------------------------------------------Front dash code for rotation--------------------------------------------
-	/*
-	vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
-	mat4x4 vehicle_trans;
-	vehicle->GetTransform(&vehicle_trans);
-
-	//Vehicle Axis
-	//vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
-	//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
-	vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
-
-	//Vehicle pos and camera look to it
-	vec3 VehiclePos = vehicle_trans.translation();
-	vec3 Position = (VehiclePos)+Z * 10;
-	vec3 Reference = ViewDirection + VehiclePos;
-
-	Z = normalize(Position + Reference);
-	//X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-	//Y = cross(Z, X);
-
-	Position += Z * 0.05f;
-
-	//cube2body->SetPos(Position.x, Position.y, Position.z);
-	cube2body->GetTransform(&cube2.transform);
-	cube2.SetPos(Position.x, Position.y, Position.z);
-	cube2.Render();
-	
-	//------------------------------------------------Left-Right dash code for rotation--------------------------------------------
-	vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
-	mat4x4 vehicle_trans;
-	vehicle->GetTransform(&vehicle_trans);
-
-	//Vehicle Axis
-	vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
-	//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
-	vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
-
-	//Vehicle pos and camera look to it
-	vec3 VehiclePos = vehicle_trans.translation();
-	vec3 Position = (VehiclePos) - X * 10;
-	vec3 Reference = ViewDirection + VehiclePos;
-
-	//Z = normalize(Position + Reference);
-	X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-	//Y = cross(Z, X);
-
-	Position += Z * 0.05f;
-
-	//cube2body->SetPos(Position.x, Position.y, Position.z);
-	cube2body->GetTransform(&cube2.transform);
-	cube2.SetPos(Position.x, Position.y, Position.z);
-	cube2.Render();
-	*/
-
 	//Front dash
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		float impulse = 1000.0f;
-		btQuaternion impulse_quaternion(impulse, 0.0f, 0.0f, 0.0f);
-		
-		btTransform* vehicle_bt_transform = vehicle->GetBTTransform();
-		btQuaternion vehicle_rotation_quaternion = vehicle_bt_transform->getRotation();
-		btQuaternion vehicle_quaternion_conj(-vehicle_rotation_quaternion.getX(), -vehicle_rotation_quaternion.getY(), -vehicle_rotation_quaternion.getZ(), vehicle_rotation_quaternion.getW());
-		
- 		vehicle_rotation_quaternion *= impulse_quaternion;
-		vehicle_rotation_quaternion *= vehicle_quaternion_conj;
+		vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
+		mat4x4 vehicle_trans;
+		vehicle->GetTransform(&vehicle_trans);
 
-		vehicle->Push(vehicle_rotation_quaternion.getZ(), vehicle_rotation_quaternion.getY(), vehicle_rotation_quaternion.getX());
+		//Vehicle Axis
+		//vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+		//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+		vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+
+		//Vehicle pos and camera look to it
+		vec3 VehiclePos = vehicle_trans.translation();
+		vec3 Position = (VehiclePos) + Z * FRONT_IMPULSE;
+		vec3 Reference = ViewDirection + VehiclePos;
+
+		Z = normalize(Position + Reference);
+		//X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+		//Y = cross(Z, X);
+
+		Position += Z * 0.05f;
+
+		vehicle->Push((Position.x - VehiclePos.x), (Position.y - VehiclePos.y), (Position.z - VehiclePos.z));
 	}
 
 	//Jump
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		if ((jump_coolddown.Read() * 0.001) >= 2.0f)
+		if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
 		{
 			vehicle->Push(0.0f, 5000.0f, 0.0f);
 			jump_coolddown.Start();
@@ -312,7 +311,7 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->Render();
 
-	float jump_cooldown_calc = 2.0f - jump_coolddown.Read() * 0.001;
+	float jump_cooldown_calc = JUMP_COOLDOWN - jump_coolddown.Read() * 0.001;
 	if (jump_cooldown_calc < 0)
 		jump_cooldown_calc = 0;
 
