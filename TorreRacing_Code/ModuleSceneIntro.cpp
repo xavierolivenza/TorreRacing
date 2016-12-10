@@ -22,38 +22,48 @@ bool ModuleSceneIntro::Start()
 
 	//--------------------------------------------//
 	//Start
-	cube1.size.x = 10;
+	cube1.size.x = 15;
 	cube1.size.y = 1;
 	cube1.size.z = 110;
 	cube1body = App->physics->AddBody(cube1, 0);
 	cube1body->SetPos(0, 0, 50);
 	//Arc
 	cube1_1.size.x = 1;
-	cube1_1.size.y = 8;
+	cube1_1.size.y = 10;
 	cube1_1.size.z = 1;
 	cube1_1.color = Red;
 	cube1_1body = App->physics->AddBody(cube1_1, 0);
-	cube1_1body->SetPos(4.5, 4.5, 5.5);
-	cube1_2.size.x = 8;
+	cube1_1body->SetPos(7, 5.5, 5.5);
+	cube1_2.size.x = 13;
 	cube1_2.size.y = 1;
 	cube1_2.size.z = 1;
 	cube1_2.color = Red;
 	cube1_2body = App->physics->AddBody(cube1_2, 0);
-	cube1_2body->SetPos(0, 8, 5.5);
+	cube1_2body->SetPos(0, 10, 5.5);
 	cube1_3.size.x = 1;
-	cube1_3.size.y = 8;
+	cube1_3.size.y = 10;
 	cube1_3.size.z = 1;
 	cube1_3.color = Red;
 	cube1_3body = App->physics->AddBody(cube1_3, 0);
-	cube1_3body->SetPos(-4.5, 4.5, 5.5);
+	cube1_3body->SetPos(-7, 5.5, 5.5);
 	//--------------------------------------------//
 	//Curve
-	cylinder1.radius = 10;
+	cylinder1.radius = 15;
 	cylinder1.SetRotation(90.0f, vec3(0, 0, 1));
 	cylinder1body = App->physics->AddBody(cylinder1, 0);
-	cylinder1body->SetPos(-5, 0, 105);
+	cylinder1body->SetPos(-7.5, 0, 105);
 	//--------------------------------------------//
-
+	//Furst jump
+	cube2.size.x = 100;
+	cube2.size.y = 1;
+	cube2.size.z = 15;
+	cube2body = App->physics->AddBody(cube2, 0);
+	cube2body->SetPos(-57.5, 0, 112.5);
+	cube3.size.x = 200;
+	cube3.size.y = 1;
+	cube3.size.z = 15;
+	cube3body = App->physics->AddBody(cube3, 0);
+	cube3body->SetPos(-250, 0, 112.5);
 	//--------------------------------------------//
 
 	//--------------------------------------------//
@@ -118,9 +128,13 @@ update_status ModuleSceneIntro::Update(float dt)
 	cylinder1body->GetTransform(&cylinder1.transform);
 	cylinder1.Render();
 	//--------------------------------------------//
-
+	//First jump
+	cube2body->GetTransform(&cube2.transform);
+	cube2.Render();
+	cube3body->GetTransform(&cube3.transform);
+	cube3.Render();
 	//--------------------------------------------//
-
+	
 	//--------------------------------------------//
 
 	//--------------------------------------------//

@@ -36,10 +36,11 @@ public:
 	//Curve
 	Cylinder cylinder1;
 	PhysBody3D* cylinder1body;
-
+	//First jump
 	Cube cube2;
 	PhysBody3D* cube2body;
-
+	Cube cube3;
+	PhysBody3D* cube3body;
 
 
 
