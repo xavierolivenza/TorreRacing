@@ -24,27 +24,6 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
-	//cubes to test rotations
-	/**/
-	cube2.size.x = 1;
-	cube2.size.y = 1;
-	cube2.size.z = 1;
-	cube2body = App->physics->AddBody(cube2, 500);
-	cube2body->SetPos(0, 0, 0);
-
-	cube3.size.x = 1;
-	cube3.size.y = 1;
-	cube3.size.z = 1;
-	cube3body = App->physics->AddBody(cube3, 500);
-	cube3body->SetPos(0, 0, 0);
-
-	cube4.size.x = 1;
-	cube4.size.y = 1;
-	cube4.size.z = 1;
-	cube4body = App->physics->AddBody(cube4, 500);
-	cube4body->SetPos(0, 0, 0);
-	/**/
-
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
@@ -124,8 +103,10 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 12, 10);
+	vehicle->SetPos(0, 12, 0);
 	
+	game_timer.Start();
+
 	return true;
 }
 
@@ -141,6 +122,7 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update(float dt)
 {
 	/*
+	//old camera
 	//camera look to origin of car
 	btTransform* vehicle_transform = vehicle->GetBTTransform();
 	btVector3 vehicle_origin = vehicle_transform->getOrigin();
@@ -315,8 +297,18 @@ update_status ModulePlayer::Update(float dt)
 	if (jump_cooldown_calc < 0)
 		jump_cooldown_calc = 0;
 
+	int tiemr_milisec_read = game_timer.Read();
+
+	float minutes_f = tiemr_milisec_read * 0.001 * 0.0167;
+	int minutes_i = minutes_f;
+	float decimal_minutes = minutes_f - minutes_i;
+	float seconds_f = decimal_minutes * 60;
+	int seconds_i = seconds_f;
+	float decimal_seconds = seconds_f - seconds_i;
+	int miliseconds_i = decimal_seconds * 1000;
+
 	char title[80];
-	sprintf_s(title, "TorreRacing, Vehicle velocity: %.1f Km/h, JumpCooldown: %.2f", vehicle->GetKmh(), jump_cooldown_calc);
+	sprintf_s(title, "TorreRacing, Time: %i:%2.i:%4.i Vehicle velocity: %4.1f Km/h, JumpCooldown: %.2f", minutes_i, seconds_i, miliseconds_i, vehicle->GetKmh(), jump_cooldown_calc);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
