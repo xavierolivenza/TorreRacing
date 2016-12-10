@@ -41,6 +41,24 @@ public:
 	PhysBody3D* cube2body;
 	Cube cube3;
 	PhysBody3D* cube3body;
+	//Curves
+	Cylinder cylinder2;
+	PhysBody3D* cylinder2body;
+	Cube cube4;
+	PhysBody3D* cube4body;
+	Cylinder cylinder3;
+	PhysBody3D* cylinder3body;
+	Cube cube5;
+	PhysBody3D* cube5body;
+	Cylinder cylinder4;
+	PhysBody3D* cylinder4body;
+	Cube cube6;
+	PhysBody3D* cube6body;
+	Cylinder cylinder5;
+	PhysBody3D* cylinder5body;
+	
+
+
 
 
 

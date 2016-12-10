@@ -4,6 +4,8 @@
 #include "Primitive.h"
 #include "PhysBody3D.h"
 
+#define WIDTH 15
+
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -22,7 +24,7 @@ bool ModuleSceneIntro::Start()
 
 	//--------------------------------------------//
 	//Start
-	cube1.size.x = 15;
+	cube1.size.x = WIDTH;
 	cube1.size.y = 1;
 	cube1.size.z = 110;
 	cube1body = App->physics->AddBody(cube1, 0);
@@ -48,7 +50,7 @@ bool ModuleSceneIntro::Start()
 	cube1_3body->SetPos(-7, 5.5, 5.5);
 	//--------------------------------------------//
 	//Curve
-	cylinder1.radius = 15;
+	cylinder1.radius = WIDTH;
 	cylinder1.SetRotation(90.0f, vec3(0, 0, 1));
 	cylinder1body = App->physics->AddBody(cylinder1, 0);
 	cylinder1body->SetPos(-7.5, 0, 105);
@@ -56,16 +58,47 @@ bool ModuleSceneIntro::Start()
 	//Furst jump
 	cube2.size.x = 100;
 	cube2.size.y = 1;
-	cube2.size.z = 15;
+	cube2.size.z = WIDTH;
 	cube2body = App->physics->AddBody(cube2, 0);
 	cube2body->SetPos(-57.5, 0, 112.5);
 	cube3.size.x = 200;
 	cube3.size.y = 1;
-	cube3.size.z = 15;
+	cube3.size.z = WIDTH;
 	cube3body = App->physics->AddBody(cube3, 0);
 	cube3body->SetPos(-250, 0, 112.5);
 	//--------------------------------------------//
-
+	//Curves
+	cylinder2.radius = WIDTH;
+	cylinder2.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder2body = App->physics->AddBody(cylinder2, 0);
+	cylinder2body->SetPos(-350, 0, 105);
+	cube4.size.x = WIDTH;
+	cube4.size.y = 1;
+	cube4.size.z = 30;
+	cube4body = App->physics->AddBody(cube4, 0);
+	cube4body->SetPos(-357.5, 0, 90);
+	cylinder3.radius = WIDTH;
+	cylinder3.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder3body = App->physics->AddBody(cylinder3, 0);
+	cylinder3body->SetPos(-365, 0, 75);
+	cube5.size.x = 30;
+	cube5.size.y = 1;
+	cube5.size.z = WIDTH;
+	cube5body = App->physics->AddBody(cube5, 0);
+	cube5body->SetPos(-380, 0, 67.5);
+	cylinder4.radius = WIDTH;
+	cylinder4.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder4body = App->physics->AddBody(cylinder4, 0);
+	cylinder4body->SetPos(-395, 0, 60);
+	cube6.size.x = 50;
+	cube6.size.y = 1;
+	cube6.size.z = WIDTH;
+	cube6body = App->physics->AddBody(cube6, 0);
+	cube6body->SetPos(-420, 0, 52.5);
+	cylinder5.radius = WIDTH;
+	cylinder5.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder5body = App->physics->AddBody(cylinder5, 0);
+	cylinder5body->SetPos(-445, 0, 45);
 	//--------------------------------------------//
 
 	//--------------------------------------------//
@@ -134,7 +167,21 @@ update_status ModuleSceneIntro::Update(float dt)
 	cube3body->GetTransform(&cube3.transform);
 	cube3.Render();
 	//--------------------------------------------//
-	
+	//Curves
+	cylinder2body->GetTransform(&cylinder2.transform);
+	cylinder2.Render();
+	cube4body->GetTransform(&cube4.transform);
+	cube4.Render();
+	cylinder3body->GetTransform(&cylinder3.transform);
+	cylinder3.Render();
+	cube5body->GetTransform(&cube5.transform);
+	cube5.Render();
+	cylinder4body->GetTransform(&cylinder4.transform);
+	cylinder4.Render();
+	cube6body->GetTransform(&cube6.transform);
+	cube6.Render();
+	cylinder5body->GetTransform(&cylinder5.transform);
+	cylinder5.Render();
 	//--------------------------------------------//
 
 	//--------------------------------------------//

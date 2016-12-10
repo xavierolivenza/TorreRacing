@@ -200,13 +200,13 @@ update_status ModulePlayer::Update(float dt)
 			acceleration = -MAX_ACCELERATION;
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		{
 			brake = BRAKE_POWER;
 		}
 
 		//Left dash
-		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 		{
 			vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
 			mat4x4 vehicle_trans;
@@ -232,7 +232,7 @@ update_status ModulePlayer::Update(float dt)
 		}
 
 		//Right dash
-		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 		{
 			vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
 			mat4x4 vehicle_trans;
@@ -258,7 +258,7 @@ update_status ModulePlayer::Update(float dt)
 		}
 
 		//Front dash
-		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
 			vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
 			mat4x4 vehicle_trans;
