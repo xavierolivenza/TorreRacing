@@ -19,6 +19,27 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
+	//cubes to test rotations
+	/**/
+	cube2.size.x = 1;
+	cube2.size.y = 1;
+	cube2.size.z = 1;
+	cube2body = App->physics->AddBody(cube2, 500);
+	cube2body->SetPos(0, 0, 0);
+
+	cube3.size.x = 1;
+	cube3.size.y = 1;
+	cube3.size.z = 1;
+	cube3body = App->physics->AddBody(cube3, 500);
+	cube3body->SetPos(0, 0, 0);
+
+	cube4.size.x = 1;
+	cube4.size.y = 1;
+	cube4.size.z = 1;
+	cube4body = App->physics->AddBody(cube4, 500);
+	cube4body->SetPos(0, 0, 0);
+	/**/
+
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
@@ -203,6 +224,89 @@ update_status ModulePlayer::Update(float dt)
 
 	}
 	
+
+
+	//------------------------------------------------Front dash code for rotation--------------------------------------------
+	vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
+	mat4x4 vehicle_trans;
+	vehicle->GetTransform(&vehicle_trans);
+
+	//Vehicle Axis
+	//vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+	//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+	vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+
+	//Vehicle pos and camera look to it
+	vec3 VehiclePos = vehicle_trans.translation();
+	vec3 Position = (VehiclePos)+Z * 10;
+	vec3 Reference = ViewDirection + VehiclePos;
+
+	Z = normalize(Position + Reference);
+	//X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+	//Y = cross(Z, X);
+
+	Position += Z * 0.05f;
+
+	//cube2body->SetPos(Position.x, Position.y, Position.z);
+	cube2body->GetTransform(&cube2.transform);
+	cube2.SetPos(Position.x, Position.y, Position.z);
+	cube2.Render();
+
+	/*
+	//------------------------------------------------Left dash code for rotation--------------------------------------------
+	vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
+	mat4x4 vehicle_trans;
+	vehicle->GetTransform(&vehicle_trans);
+
+	//Vehicle Axis
+	//vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+	//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+	vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+
+	//Vehicle pos and camera look to it
+	vec3 VehiclePos = vehicle_trans.translation();
+	vec3 Position = (VehiclePos)+Z * 10;
+	vec3 Reference = ViewDirection + VehiclePos;
+
+	Z = normalize(Position + Reference);
+	//X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+	//Y = cross(Z, X);
+
+	Position += Z * 0.05f;
+
+	//cube2body->SetPos(Position.x, Position.y, Position.z);
+	cube2body->GetTransform(&cube2.transform);
+	cube2.SetPos(Position.x, Position.y, Position.z);
+	cube2.Render();
+
+	//------------------------------------------------Right dash code for rotation--------------------------------------------
+	vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
+	mat4x4 vehicle_trans;
+	vehicle->GetTransform(&vehicle_trans);
+
+	//Vehicle Axis
+	//vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+	//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+	vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+
+	//Vehicle pos and camera look to it
+	vec3 VehiclePos = vehicle_trans.translation();
+	vec3 Position = (VehiclePos)+Z * 10;
+	vec3 Reference = ViewDirection + VehiclePos;
+
+	Z = normalize(Position + Reference);
+	//X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+	//Y = cross(Z, X);
+
+	Position += Z * 0.05f;
+
+	//cube2body->SetPos(Position.x, Position.y, Position.z);
+	cube2body->GetTransform(&cube2.transform);
+	cube2.SetPos(Position.x, Position.y, Position.z);
+	cube2.Render();
+	*/
+
+
 	//Front dash
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
 	{

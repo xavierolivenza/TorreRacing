@@ -31,4 +31,13 @@ public:
 private:
 	btVector3 vehicle_origin_axis;
 
+	Cube cube2;
+	PhysBody3D* cube2body;
+
+	Cube cube3;
+	PhysBody3D* cube3body;
+
+	Cube cube4;
+	PhysBody3D* cube4body;
+
 };
