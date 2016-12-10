@@ -104,6 +104,9 @@ bool ModulePlayer::Start()
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 12, 0);
+
+	//Rised curve tp
+	//vehicle->SetPos(-452.5, 12, -5);
 	
 	game_timer.Start();
 

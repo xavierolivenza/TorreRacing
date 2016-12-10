@@ -55,7 +55,7 @@ bool ModuleSceneIntro::Start()
 	cylinder1body = App->physics->AddBody(cylinder1, 0);
 	cylinder1body->SetPos(-7.5, 0, 105);
 	//--------------------------------------------//
-	//Furst jump
+	//First jump
 	cube2.size.x = 100;
 	cube2.size.y = 1;
 	cube2.size.z = WIDTH;
@@ -100,7 +100,52 @@ bool ModuleSceneIntro::Start()
 	cylinder5body = App->physics->AddBody(cylinder5, 0);
 	cylinder5body->SetPos(-445, 0, 45);
 	//--------------------------------------------//
-
+	//Rised curve
+	cube7.size.x = WIDTH;
+	cube7.size.y = 1;
+	cube7.size.z = 100;
+	cube7body = App->physics->AddBody(cube7, 0);
+	cube7body->SetPos(-452.5, 0, -5);
+	cube8.size.x = WIDTH;
+	cube8.size.y = 1;
+	cube8.size.z = 100;
+	cube8.SetRotation(10, vec3(1, 0, 0));
+	cube8body = App->physics->AddBody(cube8, 0);
+	cube8body->SetPos(-452.5, 8.69, -104.15);
+	cube9.size.x = WIDTH;
+	cube9.size.y = 1;
+	cube9.size.z = 100;
+	cube9.SetRotation(20, vec3(1, 0, 0));
+	cube9body = App->physics->AddBody(cube9, 0);
+	cube9body->SetPos(-452.5, 34.46, -200.28);
+	cube10.size.x = WIDTH;
+	cube10.size.y = 1;
+	cube10.size.z = 100;
+	cube10.SetRotation(30, vec3(1, 0, 0));
+	cube10body = App->physics->AddBody(cube10, 0);
+	cube10body->SetPos(-452.5, 76.52, -290.48);
+	cylinder6.radius = WIDTH * 2;
+	cylinder6.SetRotation(96.7177f, vec3(0.3236f, -0.3236f, 0.8891f));
+	cylinder6body = App->physics->AddBody(cylinder6, 0);
+	cylinder6body->SetPos(-430, 101.57, -333.85);
+	cube11.size.x = WIDTH;
+	cube11.size.y = 1;
+	cube11.size.z = 100;
+	cube11.SetRotation(30, vec3(1, 0, 0));
+	cube11body = App->physics->AddBody(cube11, 0);
+	cube11body->SetPos(-407.5, 76.52, -290.48);
+	cube12.size.x = WIDTH;
+	cube12.size.y = 1;
+	cube12.size.z = 100;
+	cube12.SetRotation(20, vec3(1, 0, 0));
+	cube12body = App->physics->AddBody(cube12, 0);
+	cube12body->SetPos(-407.5, 34.46, -200.28);
+	cube13.size.x = WIDTH;
+	cube13.size.y = 1;
+	cube13.size.z = 100;
+	cube13.SetRotation(10, vec3(1, 0, 0));
+	cube13body = App->physics->AddBody(cube13, 0);
+	cube13body->SetPos(-407.5, 8.69, -104.15);
 	//--------------------------------------------//
 
 	//--------------------------------------------//
@@ -139,6 +184,52 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	/*
+	//code to manually adjust some pieces
+	float a = 0;
+	float b = 0;
+	float interval = 0.1;
+	float interval_small = 0.01;
+
+	if (App->input->GetKey(SDL_SCANCODE_Y) == KEY_DOWN)
+	{
+		a += interval;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
+	{
+		a -= interval;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
+	{
+		a += interval_small;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
+	{
+		a -= interval_small;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		b += interval;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	{
+		b -= interval;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	{
+		b += interval_small;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	{
+		b -= interval_small;
+	}
+
+	PhysBody3D* body_to_move = ;
+
+	vec3 pos = body_to_move->GetPos();
+	body_to_move->SetPos(pos.x, pos.y += a, pos.z += b);
+	*/
+
 	//--------------------------------------------//
 	/*
 	Plane p(0, 1, 0, 0);
@@ -183,6 +274,23 @@ update_status ModuleSceneIntro::Update(float dt)
 	cylinder5body->GetTransform(&cylinder5.transform);
 	cylinder5.Render();
 	//--------------------------------------------//
+	//Rised curve
+	cube7body->GetTransform(&cube7.transform);
+	cube7.Render();
+	cube8body->GetTransform(&cube8.transform);
+	cube8.Render();
+	cube9body->GetTransform(&cube9.transform);
+	cube9.Render();
+	cube10body->GetTransform(&cube10.transform);
+	cube10.Render();
+	cylinder6body->GetTransform(&cylinder6.transform);
+	cylinder6.Render();
+	cube11body->GetTransform(&cube11.transform);
+	cube11.Render();
+	cube12body->GetTransform(&cube12.transform);
+	cube12.Render();
+	cube13body->GetTransform(&cube13.transform);
+	cube13.Render();
 
 	//--------------------------------------------//
 

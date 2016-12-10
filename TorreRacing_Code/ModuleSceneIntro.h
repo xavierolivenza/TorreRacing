@@ -23,9 +23,11 @@ public:
 
 public:
 
+	//--------------------------------------------//
 	//Start
 	Cube cube1;
 	PhysBody3D* cube1body;
+	//--------------------------------------------//
 	//Arc
 	Cube cube1_1;
 	PhysBody3D* cube1_1body;
@@ -33,14 +35,17 @@ public:
 	PhysBody3D* cube1_2body;
 	Cube cube1_3;
 	PhysBody3D* cube1_3body;
+	//--------------------------------------------//
 	//Curve
 	Cylinder cylinder1;
 	PhysBody3D* cylinder1body;
+	//--------------------------------------------//
 	//First jump
 	Cube cube2;
 	PhysBody3D* cube2body;
 	Cube cube3;
 	PhysBody3D* cube3body;
+	//--------------------------------------------//
 	//Curves
 	Cylinder cylinder2;
 	PhysBody3D* cylinder2body;
@@ -56,7 +61,29 @@ public:
 	PhysBody3D* cube6body;
 	Cylinder cylinder5;
 	PhysBody3D* cylinder5body;
-	
+	//--------------------------------------------//
+	//Rised curve
+	Cube cube7;
+	PhysBody3D* cube7body;
+	Cube cube8;
+	PhysBody3D* cube8body;
+	Cube cube9;
+	PhysBody3D* cube9body;
+	Cube cube10;
+	PhysBody3D* cube10body;
+	Cylinder cylinder6;
+	PhysBody3D* cylinder6body;
+	Cube cube11;
+	PhysBody3D* cube11body;
+	Cube cube12;
+	PhysBody3D* cube12body;
+	Cube cube13;
+	PhysBody3D* cube13body;
+
+
+
+
+
 
 
 
