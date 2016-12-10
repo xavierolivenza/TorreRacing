@@ -29,7 +29,10 @@ public:
 	Timer jump_coolddown;
 	Timer game_timer;
 
+	bool freecam = false;
+
 private:
+
 	btVector3 vehicle_origin_axis;
 
 };

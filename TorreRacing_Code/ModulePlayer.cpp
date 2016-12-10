@@ -171,119 +171,126 @@ update_status ModulePlayer::Update(float dt)
 	*/
 
 	turn = acceleration = brake = 0.0f;
-
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		acceleration = MAX_ACCELERATION;
+		freecam = !freecam;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (freecam == false)
 	{
-		if (turn < TURN_DEGREES)
-			turn += TURN_DEGREES;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
-		if (turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-	{
-		acceleration = -MAX_ACCELERATION;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
-	{
-		brake = BRAKE_POWER;
-	}
-
-	//Left dash
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-	{
-		vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
-		mat4x4 vehicle_trans;
-		vehicle->GetTransform(&vehicle_trans);
-
-		//Vehicle Axis
-		vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
-		//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
-		vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
-
-		//Vehicle pos and camera look to it
-		vec3 VehiclePos = vehicle_trans.translation();
-		vec3 Position = (VehiclePos)  + X * LATERAL_IMPULSE;
-		vec3 Reference = ViewDirection + VehiclePos;
-
-		//Z = normalize(Position + Reference);
-		X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-		//Y = cross(Z, X);
-
-		Position += Z * 0.05f;
-
-		vehicle->Push((Position.x - VehiclePos.x), (Position.y - VehiclePos.y), (Position.z - VehiclePos.z));
-	}
-
-	//Right dash
-	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-	{
-		vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
-		mat4x4 vehicle_trans;
-		vehicle->GetTransform(&vehicle_trans);
-
-		//Vehicle Axis
-		vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
-		//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
-		vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
-
-		//Vehicle pos and camera look to it
-		vec3 VehiclePos = vehicle_trans.translation();
-		vec3 Position = (VehiclePos) - X * LATERAL_IMPULSE;
-		vec3 Reference = ViewDirection + VehiclePos;
-
-		//Z = normalize(Position + Reference);
-		X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-		//Y = cross(Z, X);
-
-		Position += Z * 0.05f;
-
-		vehicle->Push((Position.x - VehiclePos.x), (Position.y - VehiclePos.y), (Position.z - VehiclePos.z));
-	}
-	
-	//Front dash
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-	{
-		vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
-		mat4x4 vehicle_trans;
-		vehicle->GetTransform(&vehicle_trans);
-
-		//Vehicle Axis
-		//vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
-		//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
-		vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
-
-		//Vehicle pos and camera look to it
-		vec3 VehiclePos = vehicle_trans.translation();
-		vec3 Position = (VehiclePos) + Z * FRONT_IMPULSE;
-		vec3 Reference = ViewDirection + VehiclePos;
-
-		Z = normalize(Position + Reference);
-		//X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-		//Y = cross(Z, X);
-
-		Position += Z * 0.05f;
-
-		vehicle->Push((Position.x - VehiclePos.x), (Position.y - VehiclePos.y), (Position.z - VehiclePos.z));
-	}
-
-	//Jump
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
-			vehicle->Push(0.0f, 5000.0f, 0.0f);
-			jump_coolddown.Start();
+			acceleration = MAX_ACCELERATION;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			if (turn < TURN_DEGREES)
+				turn += TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			if (turn > -TURN_DEGREES)
+				turn -= TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		{
+			acceleration = -MAX_ACCELERATION;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
+		{
+			brake = BRAKE_POWER;
+		}
+
+		//Left dash
+		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+		{
+			vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
+			mat4x4 vehicle_trans;
+			vehicle->GetTransform(&vehicle_trans);
+
+			//Vehicle Axis
+			vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+			//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+			vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+
+			//Vehicle pos and camera look to it
+			vec3 VehiclePos = vehicle_trans.translation();
+			vec3 Position = (VehiclePos)+X * LATERAL_IMPULSE;
+			vec3 Reference = ViewDirection + VehiclePos;
+
+			//Z = normalize(Position + Reference);
+			X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+			//Y = cross(Z, X);
+
+			Position += Z * 0.05f;
+
+			vehicle->Push((Position.x - VehiclePos.x), (Position.y - VehiclePos.y), (Position.z - VehiclePos.z));
+		}
+
+		//Right dash
+		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
+			mat4x4 vehicle_trans;
+			vehicle->GetTransform(&vehicle_trans);
+
+			//Vehicle Axis
+			vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+			//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+			vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+
+			//Vehicle pos and camera look to it
+			vec3 VehiclePos = vehicle_trans.translation();
+			vec3 Position = (VehiclePos)-X * LATERAL_IMPULSE;
+			vec3 Reference = ViewDirection + VehiclePos;
+
+			//Z = normalize(Position + Reference);
+			X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+			//Y = cross(Z, X);
+
+			Position += Z * 0.05f;
+
+			vehicle->Push((Position.x - VehiclePos.x), (Position.y - VehiclePos.y), (Position.z - VehiclePos.z));
+		}
+
+		//Front dash
+		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+		{
+			vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
+			mat4x4 vehicle_trans;
+			vehicle->GetTransform(&vehicle_trans);
+
+			//Vehicle Axis
+			//vec3 X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+			//vec3 Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+			vec3 Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+
+			//Vehicle pos and camera look to it
+			vec3 VehiclePos = vehicle_trans.translation();
+			vec3 Position = (VehiclePos)+Z * FRONT_IMPULSE;
+			vec3 Reference = ViewDirection + VehiclePos;
+
+			Z = normalize(Position + Reference);
+			//X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+			//Y = cross(Z, X);
+
+			Position += Z * 0.05f;
+
+			vehicle->Push((Position.x - VehiclePos.x), (Position.y - VehiclePos.y), (Position.z - VehiclePos.z));
+		}
+
+		//Jump
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
+			{
+				vehicle->Push(0.0f, 5000.0f, 0.0f);
+				jump_coolddown.Start();
+			}
 		}
 	}
 

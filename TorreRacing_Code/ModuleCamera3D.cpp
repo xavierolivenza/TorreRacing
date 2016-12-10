@@ -111,17 +111,20 @@ update_status ModuleCamera3D::Update(float dt)
 	
 	else
 	{
-		mat4x4 vehicle_trans;
-		Target->GetTransform(&vehicle_trans);
+		if (App->player->freecam == false)
+		{
+			mat4x4 vehicle_trans;
+			Target->GetTransform(&vehicle_trans);
 
-		//Vehicle Axis
-		X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
-		Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
-		Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
+			//Vehicle Axis
+			X = vec3(vehicle_trans[0], vehicle_trans[1], vehicle_trans[2]);
+			Y = vec3(vehicle_trans[4], vehicle_trans[5], vehicle_trans[6]);
+			Z = vec3(vehicle_trans[8], vehicle_trans[9], vehicle_trans[10]);
 
-		//Vehicle pos and camera look to it
-		VehiclePos = vehicle_trans.translation();
-		App->camera->Look((VehiclePos + CameraPos) - Z * 10, ViewDirection + VehiclePos, true);
+			//Vehicle pos and camera look to it
+			VehiclePos = vehicle_trans.translation();
+			App->camera->Look((VehiclePos + CameraPos) - Z * 10, ViewDirection + VehiclePos, true);
+		}
 	}
 
 	// Recalculate matrix -------------
