@@ -23,10 +23,22 @@ public:
 
 public:
 
+	//Start
 	Cube cube1;
 	PhysBody3D* cube1body;
-	
+	//Arc
+	Cube cube1_1;
+	PhysBody3D* cube1_1body;
+	Cube cube1_2;
+	PhysBody3D* cube1_2body;
+	Cube cube1_3;
+	PhysBody3D* cube1_3body;
+	//Curve
+	Cylinder cylinder1;
+	PhysBody3D* cylinder1body;
 
+	Cube cube2;
+	PhysBody3D* cube2body;
 
 
 

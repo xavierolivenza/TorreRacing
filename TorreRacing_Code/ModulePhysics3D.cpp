@@ -57,6 +57,7 @@ bool ModulePhysics3D::Start()
 
 	// Big plane as ground
 	{
+		/*
 		btCollisionShape* colShape = new btStaticPlaneShape(btVector3(0, 1, 0), 0);
 
 		btDefaultMotionState* myMotionState = new btDefaultMotionState();
@@ -64,6 +65,7 @@ bool ModulePhysics3D::Start()
 
 		btRigidBody* body = new btRigidBody(rbInfo);
 		world->addRigidBody(body);
+		*/
 	}
 
 	return true;
@@ -249,7 +251,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
 // ---------------------------------------------------------
 PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
 {
-	btCollisionShape* colShape = new btCylinderShapeX(btVector3(cylinder.height*0.5f, cylinder.radius, 0.0f));
+	btCollisionShape* colShape = new btCylinderShapeX(btVector3(cylinder.height*0.5f, cylinder.radius, 10.0f));
 	shapes.add(colShape);
 
 	btTransform startTransform;
@@ -269,7 +271,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
 	body->setUserPointer(pbody);
 	world->addRigidBody(body);
 	bodies.add(pbody);
-
+	
 	return pbody;
 }
 
