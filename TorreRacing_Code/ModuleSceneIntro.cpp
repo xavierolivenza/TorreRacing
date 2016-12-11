@@ -166,9 +166,33 @@ bool ModuleSceneIntro::Start()
 	cube14.size.z = 100;
 	cube14.SetRotation(-45, vec3(0, 1, 0));
 	cube14body = App->physics->AddBody(cube14, 0);
-	cube14body->SetPos(-324.94, 0, -95.46);
+	cube14body->SetPos(-330.69, 0, -77.8);
+	cylinder8.radius = WIDTH;
+	cylinder8.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder8body = App->physics->AddBody(cylinder8, 0);
+	cylinder8body->SetPos(-300.64, 0, -118.46);
 	//--------------------------------------------//
-
+	//Consecutive jumps
+	cube15.size.x = WIDTH;
+	cube15.size.y = 1;
+	cube15.size.z = 100;
+	cube15body = App->physics->AddBody(cube15, 0);
+	cube15body->SetPos(-293.14, 0, -168.46);
+	cube16.size.x = WIDTH;
+	cube16.size.y = 1;
+	cube16.size.z = 100;
+	cube16body = App->physics->AddBody(cube16, 0);
+	cube16body->SetPos(-293.14, 0, -318.46);
+	cube17.size.x = WIDTH;
+	cube17.size.y = 1;
+	cube17.size.z = 100;
+	cube17body = App->physics->AddBody(cube17, 0);
+	cube17body->SetPos(-293.14, 0, -468.46);
+	cube18.size.x = WIDTH;
+	cube18.size.y = 1;
+	cube18.size.z = 200;
+	cube18body = App->physics->AddBody(cube18, 0);
+	cube18body->SetPos(-293.14, 0, -740);
 	//--------------------------------------------//
 
 	//--------------------------------------------//
@@ -261,7 +285,6 @@ update_status ModuleSceneIntro::Update(float dt)
 	}
 
 	PhysBody3D* body_to_move = ;
-
 	vec3 pos = body_to_move->GetPos();
 	body_to_move->SetPos(pos.x += a, pos.y += b, pos.z += c);
 	*/
@@ -339,8 +362,18 @@ update_status ModuleSceneIntro::Update(float dt)
 	cylinder7.Render();
 	cube14body->GetTransform(&cube14.transform);
 	cube14.Render();
+	cylinder8body->GetTransform(&cylinder8.transform);
+	cylinder8.Render();
 	//--------------------------------------------//
-
+	//Consecutive jumps
+	cube15body->GetTransform(&cube15.transform);
+	cube15.Render();
+	cube16body->GetTransform(&cube16.transform);
+	cube16.Render();
+	cube17body->GetTransform(&cube17.transform);
+	cube17.Render();
+	cube18body->GetTransform(&cube18.transform);
+	cube18.Render();
 	//--------------------------------------------//
 
 	//--------------------------------------------//

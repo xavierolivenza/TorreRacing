@@ -108,7 +108,10 @@ bool ModulePlayer::Start()
 
 	//Rised curve tp
 	//vehicle->SetPos(-452.5, 12, -5);
-	
+
+	//Consecutive jumps tp
+	vehicle->SetPos(-300.64, 12, -118.46);
+
 	game_timer.Start();
 	game_timer.Stop();
 
