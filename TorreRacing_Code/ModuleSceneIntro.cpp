@@ -262,42 +262,60 @@ bool ModuleSceneIntro::Start()
 	barn_ground.color = Sienna;
 	barn_ground_body = App->physics->AddBody(barn_ground, 0);
 	barn_ground_body->SetPos(-488.14, 0, -310); 
+	barn_grass.size.x = 55;
+	barn_grass.size.y = 1;
+	barn_grass.size.z = 70;
+	barn_grass.color = Green;
+	barn_grass_body = App->physics->AddBody(barn_grass, 0);
+	barn_grass_body->SetPos(-488.14, -0.25, -310);
 	barn_wall_1.size.x = 1;
 	barn_wall_1.size.y = 20;
 	barn_wall_1.size.z = 60;
-	barn_wall_1.color = Red;
+	barn_wall_1.color = DarkRed;
 	barn_wall_1_body = App->physics->AddBody(barn_wall_1, 0);
 	barn_wall_1_body->SetPos(-465.14, 9.5, -310);
 	barn_wall_2.size.x = 1;
 	barn_wall_2.size.y = 20;
 	barn_wall_2.size.z = 60;
-	barn_wall_2.color = Red;
+	barn_wall_2.color = DarkRed;
 	barn_wall_2_body = App->physics->AddBody(barn_wall_2, 0);
 	barn_wall_2_body->SetPos(-511.14, 9.5, -310);
 	barn_wall_3.size.x = 47;
 	barn_wall_3.size.y = 20;
 	barn_wall_3.size.z = 1;
-	barn_wall_3.color = Red;
+	barn_wall_3.color = DarkRed;
 	barn_wall_3_body = App->physics->AddBody(barn_wall_3, 0);
 	barn_wall_3_body->SetPos(-488.14, 9.5, -279.5);
 	barn_wall_4.size.x = 16;
 	barn_wall_4.size.y = 20;
 	barn_wall_4.size.z = 1;
-	barn_wall_4.color = Red;
+	barn_wall_4.color = DarkRed;
 	barn_wall_4_body = App->physics->AddBody(barn_wall_4, 0);
 	barn_wall_4_body->SetPos(-472.64, 9.5, -340.5);
 	barn_wall_5.size.x = 16;
 	barn_wall_5.size.y = 20;
 	barn_wall_5.size.z = 1;
-	barn_wall_5.color = Red;
+	barn_wall_5.color = DarkRed;
 	barn_wall_5_body = App->physics->AddBody(barn_wall_5, 0);
 	barn_wall_5_body->SetPos(-503.64, 9.5, -340.5);
 	barn_wall_6.size.x = 15;
 	barn_wall_6.size.y = 8;
 	barn_wall_6.size.z = 1;
-	barn_wall_6.color = Red;
+	barn_wall_6.color = DarkRed;
 	barn_wall_6_body = App->physics->AddBody(barn_wall_6, 0);
 	barn_wall_6_body->SetPos(-488.14, 15.5, -340.5);
+	barn_wall_7.size.x = 1;
+	barn_wall_7.size.y = 11;
+	barn_wall_7.size.z = 8;
+	barn_wall_7.color = DarkRed;
+	barn_wall_7_body = App->physics->AddBody(barn_wall_7, 0);
+	barn_wall_7_body->SetPos(-495.14, 6, -340.5 - 4.5);
+	barn_wall_8.size.x = 1;
+	barn_wall_8.size.y = 11;
+	barn_wall_8.size.z = 8;
+	barn_wall_8.color = DarkRed;
+	barn_wall_8_body = App->physics->AddBody(barn_wall_8, 0);
+	barn_wall_8_body->SetPos(-481.14, 6, -340.5 - 4.5);
 
 	return ret;
 }
@@ -495,6 +513,8 @@ update_status ModuleSceneIntro::Update(float dt)
 	//--------------------------------------------//
 	barn_ground_body->GetTransform(&barn_ground.transform);
 	barn_ground.Render();
+	barn_grass_body->GetTransform(&barn_grass.transform);
+	barn_grass.Render();
 	barn_wall_1_body->GetTransform(&barn_wall_1.transform);
 	barn_wall_1.Render();
 	barn_wall_2_body->GetTransform(&barn_wall_2.transform);
@@ -507,7 +527,10 @@ update_status ModuleSceneIntro::Update(float dt)
 	barn_wall_5.Render();
 	barn_wall_6_body->GetTransform(&barn_wall_6.transform);
 	barn_wall_6.Render();
-
+	barn_wall_7_body->GetTransform(&barn_wall_7.transform);
+	barn_wall_7.Render();
+	barn_wall_8_body->GetTransform(&barn_wall_8.transform);
+	barn_wall_8.Render();
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
