@@ -21,12 +21,35 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
-public:
+private:
+	//--------------------------------------------//
+	//-----------------Car parts------------------//
+	//--------------------------------------------//
+	//Chasis
+	Cube p_chassis;
+	PhysBody3D* pb_chassis;
+	//--------------------------------------------//
+	//Wheels
+	Cylinder p_wheel;
+	PhysBody3D* pb_wheel;
+	Cylinder p_wheel2;
+	PhysBody3D* pb_wheel2;
+	//--------------------------------------------//
+	//Motor
+	PhysMotor3D* left_wheel;
+	PhysMotor3D* right_wheel;
+	//--------------------------------------------//
 
+	//--------------------------------------------//
+	//---------------Circuit parts----------------//
 	//--------------------------------------------//
 	//Start
 	Cube cube1;
 	PhysBody3D* cube1body;
+	//--------------------------------------------//
+	//Start sensor
+	Cube start_sensor;
+	PhysBody3D* start_sensorbody;
 	//--------------------------------------------//
 	//Arc
 	Cube cube1_1;
@@ -79,6 +102,12 @@ public:
 	PhysBody3D* cube12body;
 	Cube cube13;
 	PhysBody3D* cube13body;
+	//--------------------------------------------//
+	//Before consecutive jumps
+	Cylinder cylinder7;
+	PhysBody3D* cylinder7body;
+	Cube cube14;
+	PhysBody3D* cube14body;
 
 
 
@@ -87,21 +116,10 @@ public:
 
 
 
+		bool sensors_debug = true;
 
+	public:
 
+		bool first_time_start_sensor = true;
 
-
-
-
-	PhysBody3D* pb_chassis;
-	Cube p_chassis;
-
-	PhysBody3D* pb_wheel;
-	Cylinder p_wheel;
-
-	PhysBody3D* pb_wheel2;
-	Cylinder p_wheel2;
-
-	PhysMotor3D* left_wheel;
-	PhysMotor3D* right_wheel;
 };

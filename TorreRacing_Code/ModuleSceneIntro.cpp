@@ -29,6 +29,15 @@ bool ModuleSceneIntro::Start()
 	cube1.size.z = 110;
 	cube1body = App->physics->AddBody(cube1, 0);
 	cube1body->SetPos(0, 0, 50);
+	//Start sensor
+	start_sensor.size.x = WIDTH - 2;
+	start_sensor.size.y = 9;
+	start_sensor.size.z = 1;
+	start_sensor.color = Green;
+	start_sensorbody = App->physics->AddBody(start_sensor, 0);
+	start_sensorbody->SetAsSensor(true);
+	start_sensorbody->collision_listeners.add(this);
+	start_sensorbody->SetPos(0, 5, 5.5);
 	//Arc
 	cube1_1.size.x = 1;
 	cube1_1.size.y = 10;
@@ -147,7 +156,17 @@ bool ModuleSceneIntro::Start()
 	cube13body = App->physics->AddBody(cube13, 0);
 	cube13body->SetPos(-407.5, 8.69, -104.15);
 	//--------------------------------------------//
-
+	//Before consecutive jumps
+	cylinder7.radius = WIDTH * 2;
+	cylinder7.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder7body = App->physics->AddBody(cylinder7, 0);
+	cylinder7body->SetPos(-385, 0, -54.8);
+	cube14.size.x = WIDTH;
+	cube14.size.y = 1;
+	cube14.size.z = 100;
+	cube14.SetRotation(-45, vec3(0, 1, 0));
+	cube14body = App->physics->AddBody(cube14, 0);
+	cube14body->SetPos(-324.94, 0, -95.46);
 	//--------------------------------------------//
 
 	//--------------------------------------------//
@@ -188,6 +207,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	//code to manually adjust some pieces
 	float a = 0;
 	float b = 0;
+	float c = 0;
 	float interval = 0.1;
 	float interval_small = 0.01;
 
@@ -223,11 +243,27 @@ update_status ModuleSceneIntro::Update(float dt)
 	{
 		b -= interval_small;
 	}
+	if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
+	{
+		c += interval;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		c -= interval;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
+	{
+		c += interval_small;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+	{
+		c -= interval_small;
+	}
 
 	PhysBody3D* body_to_move = ;
 
 	vec3 pos = body_to_move->GetPos();
-	body_to_move->SetPos(pos.x, pos.y += a, pos.z += b);
+	body_to_move->SetPos(pos.x += a, pos.y += b, pos.z += c);
 	*/
 
 	//--------------------------------------------//
@@ -240,6 +276,12 @@ update_status ModuleSceneIntro::Update(float dt)
 	//Start
 	cube1body->GetTransform(&cube1.transform);
 	cube1.Render();
+	//Start sensor
+	if (sensors_debug == true)
+	{
+		start_sensorbody->GetTransform(&start_sensor.transform);
+		start_sensor.Render();
+	}
 	//Arc
 	cube1_1body->GetTransform(&cube1_1.transform);
 	cube1_1.Render();
@@ -291,7 +333,12 @@ update_status ModuleSceneIntro::Update(float dt)
 	cube12.Render();
 	cube13body->GetTransform(&cube13.transform);
 	cube13.Render();
-
+	//--------------------------------------------//
+	//Before consecutive jumps
+	cylinder7body->GetTransform(&cylinder7.transform);
+	cylinder7.Render();
+	cube14body->GetTransform(&cube14.transform);
+	cube14.Render();
 	//--------------------------------------------//
 
 	//--------------------------------------------//
@@ -304,11 +351,19 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	//--------------------------------------------//
 
-	//--------------------------------------------//
-
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		sensors_debug = !sensors_debug;
+	}
+		
 	return UPDATE_CONTINUE;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
+	if (((body1 == start_sensorbody) || (body2 == start_sensorbody)) && (first_time_start_sensor == true))
+	{
+		App->player->game_timer.Start();
+		first_time_start_sensor = false;
+	}
 }

@@ -33,6 +33,8 @@ public:
 
 private:
 
+	mat4x4 original_vehicle_trans;
+
 	btVector3 vehicle_origin_axis;
 
 };

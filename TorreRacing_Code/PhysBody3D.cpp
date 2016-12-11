@@ -4,7 +4,9 @@
 
 // =================================================
 PhysBody3D::PhysBody3D(btRigidBody* body) : body(body)
-{}
+{
+	body->setUserPointer(this);
+}
 
 // ---------------------------------------------------------
 PhysBody3D::~PhysBody3D()
@@ -24,15 +26,6 @@ void PhysBody3D::GetTransform(float* matrix) const
 	if(body != NULL && matrix != NULL)
 	{
 		body->getWorldTransform().getOpenGLMatrix(matrix);
-	}
-}
-
-// ---------------------------------------------------------
-btTransform* PhysBody3D::GetBTTransform() const
-{
-	if (body != NULL)
-	{
-		return &body->getWorldTransform();
 	}
 }
 
@@ -61,4 +54,23 @@ void PhysBody3D::SetPos(float x, float y, float z)
 
 const vec3 PhysBody3D::GetPos() const {
 	return vehicle_position;
+}
+
+// ---------------------------------------------------------
+void PhysBody3D::SetAsSensor(bool is_sensor)
+{
+	if (this->is_sensor != is_sensor)
+	{
+		this->is_sensor = is_sensor;
+		if (is_sensor == true)
+			body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+		else
+			body->setCollisionFlags(body->getCollisionFlags() &~btCollisionObject::CF_NO_CONTACT_RESPONSE);
+	}
+}
+
+// ---------------------------------------------------------
+bool PhysBody3D::IsSensor() const
+{
+	return is_sensor;
 }

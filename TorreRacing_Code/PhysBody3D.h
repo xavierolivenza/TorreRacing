@@ -19,14 +19,16 @@ public:
 
 	void Push(float x, float y, float z);
 	void GetTransform(float* matrix) const;
-	btTransform* GetBTTransform() const;
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
 	const vec3 GetPos() const;
+	void SetAsSensor(bool is_sensor);
+	bool IsSensor() const;
 
 private:
 	btRigidBody* body = nullptr;
 	vec3 vehicle_position;
+	bool is_sensor = false;
 
 public:
 	p2List<Module*> collision_listeners;

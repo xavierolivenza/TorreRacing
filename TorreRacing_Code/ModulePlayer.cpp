@@ -104,11 +104,13 @@ bool ModulePlayer::Start()
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 12, 0);
+	vehicle->GetTransform(&original_vehicle_trans);
 
 	//Rised curve tp
 	//vehicle->SetPos(-452.5, 12, -5);
 	
 	game_timer.Start();
+	game_timer.Stop();
 
 	return true;
 }
@@ -124,6 +126,14 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
+	//Reload Game, restart
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
+	{
+		vehicle->SetPos(0, 12, 0);
+		vehicle->SetTransform(&original_vehicle_trans);
+		App->scene_intro->first_time_start_sensor = true;
+	}
+
 	/*
 	//old camera
 	//camera look to origin of car
@@ -303,19 +313,28 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->Render();
 
-	float jump_cooldown_calc = JUMP_COOLDOWN - jump_coolddown.Read() * 0.001;
+	float jump_cooldown_calc = 0.0f;
+	jump_cooldown_calc = JUMP_COOLDOWN - jump_coolddown.Read() * 0.001f;
 	if (jump_cooldown_calc < 0)
 		jump_cooldown_calc = 0;
 
-	int tiemr_milisec_read = game_timer.Read();
+	int tiemr_milisec_read = 0;
+	tiemr_milisec_read = game_timer.Read();
 
-	float minutes_f = tiemr_milisec_read * 0.001 * 0.0167;
-	int minutes_i = minutes_f;
-	float decimal_minutes = minutes_f - minutes_i;
-	float seconds_f = decimal_minutes * 60;
-	int seconds_i = seconds_f;
-	float decimal_seconds = seconds_f - seconds_i;
-	int miliseconds_i = decimal_seconds * 1000;
+	float minutes_f = 0.0f;
+	int minutes_i = 0;
+	float decimal_minutes = 0.0f;
+	float seconds_f = 0.0f;
+	int seconds_i = 0;
+	float decimal_seconds = 0.0f;
+	int miliseconds_i = 0;
+	minutes_f = tiemr_milisec_read * 0.001f * 0.0167f;
+	minutes_i = minutes_f;
+	decimal_minutes = minutes_f - minutes_i;
+	seconds_f = decimal_minutes * 60;
+	seconds_i = seconds_f;
+	decimal_seconds = seconds_f - seconds_i;
+	miliseconds_i = decimal_seconds * 1000;
 
 	char title[80];
 	sprintf_s(title, "TorreRacing, Time: %i:%2.i:%4.i Vehicle velocity: %4.1f Km/h, JumpCooldown: %.2f", minutes_i, seconds_i, miliseconds_i, vehicle->GetKmh(), jump_cooldown_calc);
