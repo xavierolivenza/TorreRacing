@@ -120,15 +120,35 @@ private:
 	PhysBody3D*  cube17body;
 	Cube		 cube18;
 	PhysBody3D*  cube18body;
-
-
-
-
-
-
-
-
-
+	Cylinder     cylinder9;
+	PhysBody3D*  cylinder9body;
+	//--------------------------------------------//
+	//After consecutive jumps
+	Cube		 cube19;
+	PhysBody3D*  cube19body;
+	Cylinder     cylinder10;
+	PhysBody3D*  cylinder10body;
+	Cube		 cube20;
+	PhysBody3D*  cube20body;
+	Cylinder     cylinder11;
+	PhysBody3D*  cylinder11body;
+	Cube		 cube21;
+	PhysBody3D*  cube21body;
+	Cylinder     cylinder12;
+	PhysBody3D*  cylinder12body;
+	Cube		 cube22;
+	PhysBody3D*  cube22body;
+	Cylinder     cylinder13;
+	PhysBody3D*  cylinder13body;
+	Cube		 cube23;
+	PhysBody3D*  cube23body;
+	//--------------------------------------------//
+	//Final line
+	Cylinder     cylinder14;
+	PhysBody3D*  cylinder14body;
+	Cube		 cube24;
+	PhysBody3D*  cube24body;
+	//--------------------------------------------//
 
 	bool sensors_debug = true;
 

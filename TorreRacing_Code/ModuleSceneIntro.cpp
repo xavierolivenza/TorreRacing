@@ -193,25 +193,65 @@ bool ModuleSceneIntro::Start()
 	cube18.size.z = 200;
 	cube18body = App->physics->AddBody(cube18, 0);
 	cube18body->SetPos(-293.14, 0, -740);
+	cylinder9.radius = WIDTH;
+	cylinder9.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder9body = App->physics->AddBody(cylinder9, 0);
+	cylinder9body->SetPos(-300.64, 0, -840);
 	//--------------------------------------------//
-
+	//Before consecutive jumps
+	cube19.size.x = 50;
+	cube19.size.y = 1;
+	cube19.size.z = WIDTH;
+	cube19body = App->physics->AddBody(cube19, 0);
+	cube19body->SetPos(-325.64, 0, -847.5);
+	cylinder10.radius = WIDTH;
+	cylinder10.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder10body = App->physics->AddBody(cylinder10, 0);
+	cylinder10body->SetPos(-350.64, 0, -855);
+	cube20.size.x = WIDTH;
+	cube20.size.y = 1;
+	cube20.size.z = 50;
+	cube20body = App->physics->AddBody(cube20, 0);
+	cube20body->SetPos(-358.14, 0, -880);
+	cylinder11.radius = WIDTH;
+	cylinder11.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder11body = App->physics->AddBody(cylinder11, 0);
+	cylinder11body->SetPos(-365.64, 0, -905);
+	cube21.size.x = 50;
+	cube21.size.y = 1;
+	cube21.size.z = WIDTH;
+	cube21body = App->physics->AddBody(cube21, 0);
+	cube21body->SetPos(-390.64, 0, -912.5);
+	cylinder12.radius = WIDTH;
+	cylinder12.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder12body = App->physics->AddBody(cylinder12, 0);
+	cylinder12body->SetPos(-415.64, 0, -905);
+	cube22.size.x = WIDTH;
+	cube22.size.y = 1;
+	cube22.size.z = 50;
+	cube22body = App->physics->AddBody(cube22, 0);
+	cube22body->SetPos(-423.14, 0, -880);
+	cylinder13.radius = WIDTH;
+	cylinder13.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder13body = App->physics->AddBody(cylinder13, 0);
+	cylinder13body->SetPos(-430.64, 0, -855);
+	cube23.size.x = 50;
+	cube23.size.y = 1;
+	cube23.size.z = WIDTH;
+	cube23body = App->physics->AddBody(cube23, 0);
+	cube23body->SetPos(-455.64, 0, -847.5);
 	//--------------------------------------------//
-
+	//Final line
+	cylinder14.radius = WIDTH;
+	cylinder14.SetRotation(90.0f, vec3(0, 0, 1));
+	cylinder14body = App->physics->AddBody(cylinder14, 0);
+	cylinder14body->SetPos(-480.64, 0, -840);
+	cube24.size.x = WIDTH;
+	cube24.size.y = 1;
+	cube24.size.z = 500;
+	cube24body = App->physics->AddBody(cube24, 0);
+	cube24body->SetPos(-488.14, 0, -590);
 	//--------------------------------------------//
-
-	//--------------------------------------------//
-
-	//--------------------------------------------//
-
-	//--------------------------------------------//
-
-	//--------------------------------------------//
-
-	//--------------------------------------------//
-
-	//--------------------------------------------//
-
-
 
 	return ret;
 }
@@ -374,14 +414,34 @@ update_status ModuleSceneIntro::Update(float dt)
 	cube17.Render();
 	cube18body->GetTransform(&cube18.transform);
 	cube18.Render();
+	cylinder9body->GetTransform(&cylinder9.transform);
+	cylinder9.Render();
 	//--------------------------------------------//
-
+	//After consecutive jumps
+	cube19body->GetTransform(&cube19.transform);
+	cube19.Render();
+	cylinder10body->GetTransform(&cylinder10.transform);
+	cylinder10.Render();
+	cube20body->GetTransform(&cube20.transform);
+	cube20.Render();
+	cylinder11body->GetTransform(&cylinder11.transform);
+	cylinder11.Render();
+	cube21body->GetTransform(&cube21.transform);
+	cube21.Render();
+	cylinder12body->GetTransform(&cylinder12.transform);
+	cylinder12.Render();
+	cube22body->GetTransform(&cube22.transform);
+	cube22.Render();
+	cylinder13body->GetTransform(&cylinder13.transform);
+	cylinder13.Render();
+	cube23body->GetTransform(&cube23.transform);
+	cube23.Render();
 	//--------------------------------------------//
-
-	//--------------------------------------------//
-
-	//--------------------------------------------//
-
+	//Final line
+	cylinder14body->GetTransform(&cylinder14.transform);
+	cylinder14.Render();
+	cube24body->GetTransform(&cube24.transform);
+	cube24.Render();
 	//--------------------------------------------//
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
