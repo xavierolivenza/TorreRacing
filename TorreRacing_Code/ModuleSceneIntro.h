@@ -157,10 +157,16 @@ private:
 	PhysBody3D*  barn_ground_body;
 	Cube		 barn_wall_1;
 	PhysBody3D*  barn_wall_1_body;
-
-
-
-
+	Cube		 barn_wall_2;
+	PhysBody3D*  barn_wall_2_body;
+	Cube		 barn_wall_3;
+	PhysBody3D*  barn_wall_3_body;
+	Cube		 barn_wall_4;
+	PhysBody3D*  barn_wall_4_body;
+	Cube		 barn_wall_5;
+	PhysBody3D*  barn_wall_5_body;
+	Cube		 barn_wall_6;
+	PhysBody3D*  barn_wall_6_body;
 
 
 	bool sensors_debug = true;

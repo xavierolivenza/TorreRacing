@@ -262,15 +262,42 @@ bool ModuleSceneIntro::Start()
 	barn_ground.color = Sienna;
 	barn_ground_body = App->physics->AddBody(barn_ground, 0);
 	barn_ground_body->SetPos(-488.14, 0, -310); 
-
-	barn_wall_1.size.x = 10;
-	barn_wall_1.size.y = 10;
-	barn_wall_1.size.z = 10;
+	barn_wall_1.size.x = 1;
+	barn_wall_1.size.y = 20;
+	barn_wall_1.size.z = 60;
 	barn_wall_1.color = Red;
 	barn_wall_1_body = App->physics->AddBody(barn_wall_1, 0);
-	barn_wall_1_body->SetPos(-488.14 + 22.5, 0, -310);
-
-
+	barn_wall_1_body->SetPos(-465.14, 9.5, -310);
+	barn_wall_2.size.x = 1;
+	barn_wall_2.size.y = 20;
+	barn_wall_2.size.z = 60;
+	barn_wall_2.color = Red;
+	barn_wall_2_body = App->physics->AddBody(barn_wall_2, 0);
+	barn_wall_2_body->SetPos(-511.14, 9.5, -310);
+	barn_wall_3.size.x = 47;
+	barn_wall_3.size.y = 20;
+	barn_wall_3.size.z = 1;
+	barn_wall_3.color = Red;
+	barn_wall_3_body = App->physics->AddBody(barn_wall_3, 0);
+	barn_wall_3_body->SetPos(-488.14, 9.5, -279.5);
+	barn_wall_4.size.x = 16;
+	barn_wall_4.size.y = 20;
+	barn_wall_4.size.z = 1;
+	barn_wall_4.color = Red;
+	barn_wall_4_body = App->physics->AddBody(barn_wall_4, 0);
+	barn_wall_4_body->SetPos(-472.64, 9.5, -340.5);
+	barn_wall_5.size.x = 16;
+	barn_wall_5.size.y = 20;
+	barn_wall_5.size.z = 1;
+	barn_wall_5.color = Red;
+	barn_wall_5_body = App->physics->AddBody(barn_wall_5, 0);
+	barn_wall_5_body->SetPos(-503.64, 9.5, -340.5);
+	barn_wall_6.size.x = 15;
+	barn_wall_6.size.y = 8;
+	barn_wall_6.size.z = 1;
+	barn_wall_6.color = Red;
+	barn_wall_6_body = App->physics->AddBody(barn_wall_6, 0);
+	barn_wall_6_body->SetPos(-488.14, 15.5, -340.5);
 
 	return ret;
 }
@@ -470,9 +497,16 @@ update_status ModuleSceneIntro::Update(float dt)
 	barn_ground.Render();
 	barn_wall_1_body->GetTransform(&barn_wall_1.transform);
 	barn_wall_1.Render();
-
-
-
+	barn_wall_2_body->GetTransform(&barn_wall_2.transform);
+	barn_wall_2.Render();
+	barn_wall_3_body->GetTransform(&barn_wall_3.transform);
+	barn_wall_3.Render();
+	barn_wall_4_body->GetTransform(&barn_wall_4.transform);
+	barn_wall_4.Render();
+	barn_wall_5_body->GetTransform(&barn_wall_5.transform);
+	barn_wall_5.Render();
+	barn_wall_6_body->GetTransform(&barn_wall_6.transform);
+	barn_wall_6.Render();
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
