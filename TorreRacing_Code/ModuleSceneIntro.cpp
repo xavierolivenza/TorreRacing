@@ -253,6 +253,25 @@ bool ModuleSceneIntro::Start()
 	cube24body->SetPos(-488.14, 0, -590);
 	//--------------------------------------------//
 
+	//--------------------------------------------//
+	//-----------------Barn parts-----------------//
+	//--------------------------------------------//
+	barn_ground.size.x = 45;
+	barn_ground.size.y = 1;
+	barn_ground.size.z = 60;
+	barn_ground.color = Sienna;
+	barn_ground_body = App->physics->AddBody(barn_ground, 0);
+	barn_ground_body->SetPos(-488.14, 0, -310); 
+
+	barn_wall_1.size.x = 10;
+	barn_wall_1.size.y = 10;
+	barn_wall_1.size.z = 10;
+	barn_wall_1.color = Red;
+	barn_wall_1_body = App->physics->AddBody(barn_wall_1, 0);
+	barn_wall_1_body->SetPos(-488.14 + 22.5, 0, -310);
+
+
+
 	return ret;
 }
 
@@ -443,6 +462,18 @@ update_status ModuleSceneIntro::Update(float dt)
 	cube24body->GetTransform(&cube24.transform);
 	cube24.Render();
 	//--------------------------------------------//
+
+	//--------------------------------------------//
+	//-----------------Barn parts-----------------//
+	//--------------------------------------------//
+	barn_ground_body->GetTransform(&barn_ground.transform);
+	barn_ground.Render();
+	barn_wall_1_body->GetTransform(&barn_wall_1.transform);
+	barn_wall_1.Render();
+
+
+
+
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{

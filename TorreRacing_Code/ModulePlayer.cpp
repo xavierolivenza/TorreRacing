@@ -117,6 +117,9 @@ bool ModulePlayer::Start()
 
 	//Final line tp
 	//vehicle->SetPos(-488.14, 12, -590);
+	
+	//End Barn tp
+	vehicle->SetPos(-488.14, 0, -310);
 
 	game_timer.Start();
 	game_timer.Stop();

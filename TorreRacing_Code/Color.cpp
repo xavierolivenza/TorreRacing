@@ -23,3 +23,7 @@ Color SaddleBrown =		     Color(0.55f, 0.27f, 0.08f);
 Color Sienna =				 Color(0.63f, 0.32f, 0.18f);
 Color Brown =				 Color(0.65f, 0.17f, 0.17f);
 Color Maroon =				 Color(0.50f, 0.00f, 0.00f);
+
+Color Crimson =				 Color(0.86f, 0.08f, 0.24f);
+Color FireBrick =			 Color(0.70f, 0.13f, 0.13f);
+Color DarkRed =				 Color(0.55f, 0.00f, 0.00f);

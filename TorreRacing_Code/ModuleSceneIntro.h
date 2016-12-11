@@ -150,6 +150,19 @@ private:
 	PhysBody3D*  cube24body;
 	//--------------------------------------------//
 
+	//--------------------------------------------//
+	//-----------------Barn parts-----------------//
+	//--------------------------------------------//
+	Cube		 barn_ground;
+	PhysBody3D*  barn_ground_body;
+	Cube		 barn_wall_1;
+	PhysBody3D*  barn_wall_1_body;
+
+
+
+
+
+
 	bool sensors_debug = true;
 
 public:

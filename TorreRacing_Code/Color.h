@@ -1,6 +1,8 @@
 
 #pragma once
 
+//More colors http://prideout.net/archive/colors.php
+
 struct Color
 {
 	float r, g, b, a;
@@ -48,3 +50,8 @@ extern Color SaddleBrown;
 extern Color Sienna;
 extern Color Brown;
 extern Color Maroon;
+
+//Reds
+extern Color Crimson;
+extern Color FireBrick;
+extern Color DarkRed;
