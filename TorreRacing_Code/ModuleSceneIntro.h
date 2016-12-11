@@ -153,6 +153,8 @@ private:
 	//--------------------------------------------//
 	//-----------------Barn parts-----------------//
 	//--------------------------------------------//
+	Cube		 barn_sensor;
+	PhysBody3D*  barn_sensorbody;
 	Cube		 barn_ground;
 	PhysBody3D*  barn_ground_body;
 	Cube		 barn_grass;
@@ -179,5 +181,6 @@ private:
 public:
 
 	bool first_time_start_sensor = true;
+	bool first_time_barn_sensor = true;
 
 };

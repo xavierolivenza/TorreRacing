@@ -256,6 +256,14 @@ bool ModuleSceneIntro::Start()
 	//--------------------------------------------//
 	//-----------------Barn parts-----------------//
 	//--------------------------------------------//
+	barn_sensor.size.x = WIDTH;
+	barn_sensor.size.y = 11;
+	barn_sensor.size.z = 1;
+	barn_sensor.color = Green;
+	barn_sensorbody = App->physics->AddBody(barn_sensor, 0);
+	barn_sensorbody->SetAsSensor(true);
+	barn_sensorbody->collision_listeners.add(this);
+	barn_sensorbody->SetPos(-488.14, 6, -340.5);
 	barn_ground.size.x = 45;
 	barn_ground.size.y = 1;
 	barn_ground.size.z = 60;
@@ -511,6 +519,11 @@ update_status ModuleSceneIntro::Update(float dt)
 	//--------------------------------------------//
 	//-----------------Barn parts-----------------//
 	//--------------------------------------------//
+	if (sensors_debug == true)
+	{
+		barn_sensorbody->GetTransform(&barn_sensor.transform);
+		barn_sensor.Render();
+	}
 	barn_ground_body->GetTransform(&barn_ground.transform);
 	barn_ground.Render();
 	barn_grass_body->GetTransform(&barn_grass.transform);
@@ -546,5 +559,10 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	{
 		App->player->game_timer.Start();
 		first_time_start_sensor = false;
+	}
+	if (((body1 == barn_sensorbody) || (body2 == barn_sensorbody)) && (first_time_barn_sensor == true))
+	{
+		App->player->game_timer.Stop();
+		first_time_barn_sensor = false;
 	}
 }
