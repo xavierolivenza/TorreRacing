@@ -228,14 +228,12 @@ bool ModuleSceneIntro::Start()
 	cylinderWood.height = 40;
 	cylinderWoodbody = App->physics->AddBody(cylinderWood, 0);
 	cylinderWoodbody->SetPos(-390.64, 15, -912.5);
-
+	//cylinderWoodbody->SetAngularVelocity(0.0f, 0.0f, 6.0f);
 	cylinderWoodHit.radius = 3;
 	cylinderWoodHit.height = 30;
 	cylinderWoodHitbody = App->physics->AddBody(cylinderWoodHit, 10);
 	cylinderWoodHitbody->SetPos(-390.64, 4, -912.5);
-
 	App->physics->AddConstraintHinge(*cylinderWoodbody, *cylinderWoodHitbody, vec3(0, 0, 0), vec3(0, 11, 0), vec3(1, 0, 0), vec3(1, 0, 0));
-
 	//--------------------------------------------//
 	cylinder12.radius = WIDTH;
 	cylinder12.SetRotation(90.0f, vec3(0, 0, 1));
