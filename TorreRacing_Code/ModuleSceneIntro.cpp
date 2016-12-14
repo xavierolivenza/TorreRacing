@@ -234,7 +234,7 @@ bool ModuleSceneIntro::Start()
 	cylinderWoodHitbody = App->physics->AddBody(cylinderWoodHit, 10);
 	cylinderWoodHitbody->SetPos(-390.64, 4, -912.5);
 
-	//App->physics->AddConstraintHinge(*cylinderWoodbody, *cylinderWoodHitbody, *btVector3(0, 1, 0), *btVector3(0, 1, 0), *btVector3(0, 1, 0), *btVector3(0, 1, 0));
+	App->physics->AddConstraintHinge(*cylinderWoodbody, *cylinderWoodHitbody, vec3(0, 0, 0), vec3(0, 11, 0), vec3(1, 0, 0), vec3(1, 0, 0));
 
 	//--------------------------------------------//
 	cylinder12.radius = WIDTH;

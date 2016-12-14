@@ -358,11 +358,11 @@ btHingeConstraint* ModulePhysics3D::Add_Hinge_Constraint(btRigidBody& rbA, btRig
 void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisA, const vec3& axisB, bool disable_collision)
 {
 	btHingeConstraint* hinge = new btHingeConstraint(
-		*(bodyA.body), 
-		*(bodyB.body), 
+		*(bodyA.body),
+		*(bodyB.body),
 		btVector3(anchorA.x, anchorA.y, anchorA.z),
 		btVector3(anchorB.x, anchorB.y, anchorB.z),
-		btVector3(axisA.x, axisA.y, axisA.z), 
+		btVector3(axisA.x, axisA.y, axisA.z),
 		btVector3(axisB.x, axisB.y, axisB.z));
 
 	world->addConstraint(hinge, disable_collision);
