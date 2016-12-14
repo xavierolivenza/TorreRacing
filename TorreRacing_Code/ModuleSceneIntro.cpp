@@ -338,6 +338,8 @@ bool ModuleSceneIntro::Start()
 	barn_wall_8_body = App->physics->AddBody(barn_wall_8, 0);
 	barn_wall_8_body->SetPos(-481.14, 6, -340.5 - 4.5);
 
+	createChickens();
+
 	return ret;
 }
 
@@ -565,6 +567,38 @@ update_status ModuleSceneIntro::Update(float dt)
 	barn_wall_8_body->GetTransform(&barn_wall_8.transform);
 	barn_wall_8.Render();
 
+	//render Chickens
+
+	p2List_item<Cylinder*>* iteratorlegs;
+	p2List_item<Cube*>* iteratorbody;
+
+	p2List_item<PhysBody3D*>* iteratorchicken_legs_body;
+	p2List_item<PhysBody3D*>* iteratorchicken_head_body;
+
+	iteratorlegs = chicken_legs.getFirst();
+	iteratorbody = chicken_head.getFirst();
+
+	iteratorchicken_legs_body = chickenLegs_body.getFirst();
+	iteratorchicken_head_body = chickenHead_body.getFirst();
+
+	while (iteratorlegs != nullptr)
+	{
+		iteratorchicken_legs_body->data->GetTransform(&(iteratorlegs->data->transform));
+		iteratorlegs->data->Render();
+
+		iteratorchicken_legs_body = iteratorchicken_legs_body->next;
+		iteratorlegs = iteratorlegs->next;
+	}
+
+	while (iteratorbody != nullptr)
+	{
+		iteratorchicken_head_body->data->GetTransform(&(iteratorbody->data->transform));
+		iteratorbody->data->Render();
+
+		iteratorchicken_head_body = iteratorchicken_head_body->next;
+		iteratorbody = iteratorbody->next;
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		sensors_debug = !sensors_debug;
@@ -586,3 +620,67 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		first_time_barn_sensor = false;
 	}
 }
+
+void ModuleSceneIntro::createChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis) {
+
+	// -----------------------------------------------------------
+
+	Cube* cube = new Cube(2, 1.3, 1);
+	cube->color = White;
+	cube->SetPos(x, y + 1.1, z);
+	cube->SetRotation(angle, { 0,1,0 });
+	chicken_head.add(cube);
+
+	PhysBody3D* bod = App->physics->AddBody((*cube), 200);
+	chickenHead_body.add(bod);
+
+	// -----------------------------------------------------------
+
+	Cube* head = new Cube(1, 1, 1);
+
+	head->color = White;
+
+	head->SetPos(x + 1, y + 1.6, z);
+	head->SetRotation(angle, { 0,1,0 });
+	chicken_head.add(head);
+
+	PhysBody3D* headb = App->physics->AddBody((*cube), 1);
+	chickenHead_body.add(headb);
+
+	App->physics->AddConstraintP2P(*bod, *headb, { 1.0f,0,0.25f }, { -0.45f,-0.5f,0 });
+
+	// -----------------------------------------------------------
+
+
+	Cylinder* leg1 = new Cylinder(0.25, 0.75);
+
+	leg1->color = Yellow;
+	leg1->SetPos(x - 0.35f, y + 0.25f, z - 0.35);
+	leg1->SetRotation(90, { 0,0,1 });
+
+	chicken_legs.add(leg1);
+	PhysBody3D* legg1 = App->physics->AddBody(*leg1, 100);
+	chickenLegs_body.add(legg1);
+	App->physics->AddConstraintP2P(*bod, *legg1, { -0.35f,-0.5f,-0.35f }, { +0.7f,0,0 });
+
+	// -----------------------------------------------------------
+
+	Cylinder* leg2 = new Cylinder(0.25, 0.75);
+
+	leg2->color = Yellow;
+	leg2->SetPos(x + 0.35f, y + 0.25f, z - 0.35f);
+	leg2->SetRotation(90, { 0,0,1 });
+
+	chicken_legs.add(leg2);
+	PhysBody3D* legg2 = App->physics->AddBody(*leg2, 100);
+	chickenLegs_body.add(legg2);
+	App->physics->AddConstraintP2P(*bod, *legg2, { +0.35f,-0.5f,-0.35f }, { 0.7f,0,0 });
+
+}
+
+void ModuleSceneIntro::createChickens()
+{
+	createChicken(0, 10, 0, 0, { 0,0,1 });
+
+}
+

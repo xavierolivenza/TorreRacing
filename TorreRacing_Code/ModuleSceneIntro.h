@@ -182,6 +182,11 @@ private:
 	PhysBody3D*  barn_wall_7_body;
 	Cube		 barn_wall_8;
 	PhysBody3D*  barn_wall_8_body;
+	
+	p2List<Cube*> chicken_head;
+	p2List<PhysBody3D*> chickenHead_body;
+	p2List<PhysBody3D*> chickenLegs_body;
+	p2List<Cylinder*> chicken_legs;
 
 	bool sensors_debug = true;
 
@@ -189,5 +194,8 @@ public:
 
 	bool first_time_start_sensor = true;
 	bool first_time_barn_sensor = true;
+
+	void createChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis);
+	void createChickens();
 
 };
