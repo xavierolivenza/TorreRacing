@@ -134,6 +134,13 @@ private:
 	PhysBody3D*  cylinder11body;
 	Cube		 cube21;
 	PhysBody3D*  cube21body;
+	//--------------------------------------------//
+	//Wood
+	Cylinder     cylinderWood;
+	PhysBody3D*  cylinderWoodbody;
+	Cylinder     cylinderWoodHit;
+	PhysBody3D*  cylinderWoodHitbody;
+	//--------------------------------------------//
 	Cylinder     cylinder12;
 	PhysBody3D*  cylinder12body;
 	Cube		 cube22;
