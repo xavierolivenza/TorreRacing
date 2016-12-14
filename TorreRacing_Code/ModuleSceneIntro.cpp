@@ -569,6 +569,8 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	//render Chickens
 
+	
+
 	p2List_item<Cylinder*>* iteratorlegs;
 	p2List_item<Cube*>* iteratorbody;
 
@@ -681,6 +683,5 @@ void ModuleSceneIntro::createChicken(const float x, const float y, const float z
 void ModuleSceneIntro::createChickens()
 {
 	createChicken(0, 10, 0, 0, { 0,0,1 });
-
 }
 
