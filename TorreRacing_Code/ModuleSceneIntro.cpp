@@ -222,6 +222,21 @@ bool ModuleSceneIntro::Start()
 	cube21.size.z = WIDTH;
 	cube21body = App->physics->AddBody(cube21, 0);
 	cube21body->SetPos(-390.64, 0, -912.5);
+	//--------------------------------------------//
+	//Wood
+	cylinderWood.radius = 0.5;
+	cylinderWood.height = 40;
+	cylinderWoodbody = App->physics->AddBody(cylinderWood, 0);
+	cylinderWoodbody->SetPos(-390.64, 15, -912.5);
+
+	cylinderWoodHit.radius = 3;
+	cylinderWoodHit.height = 30;
+	cylinderWoodHitbody = App->physics->AddBody(cylinderWoodHit, 10);
+	cylinderWoodHitbody->SetPos(-390.64, 4, -912.5);
+
+	//App->physics->AddConstraintHinge(*cylinderWoodbody, *cylinderWoodHitbody, *btVector3(0, 1, 0), *btVector3(0, 1, 0), *btVector3(0, 1, 0), *btVector3(0, 1, 0));
+
+	//--------------------------------------------//
 	cylinder12.radius = WIDTH;
 	cylinder12.SetRotation(90.0f, vec3(0, 0, 1));
 	cylinder12body = App->physics->AddBody(cylinder12, 0);
@@ -500,6 +515,13 @@ update_status ModuleSceneIntro::Update(float dt)
 	cylinder11.Render();
 	cube21body->GetTransform(&cube21.transform);
 	cube21.Render();
+	//--------------------------------------------//
+	//Wood
+	cylinderWoodbody->GetTransform(&cylinderWood.transform);
+	cylinderWood.Render();
+	cylinderWoodHitbody->GetTransform(&cylinderWoodHit.transform);
+	cylinderWoodHit.Render();
+	//--------------------------------------------//
 	cylinder12body->GetTransform(&cylinder12.transform);
 	cylinder12.Render();
 	cube22body->GetTransform(&cube22.transform);
