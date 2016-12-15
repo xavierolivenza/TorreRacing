@@ -140,6 +140,18 @@ private:
 	PhysBody3D*  cylinderWoodbody;
 	Cylinder     cylinderWoodHit;
 	PhysBody3D*  cylinderWoodHitbody;
+	Sphere       sphere1WoodSupport1;
+	PhysBody3D*  sphere1WoodSupport1body;
+	Cylinder     cylinderWoodSupport1;
+	PhysBody3D*  cylinderWoodSupport1body;
+	Sphere       sphere2WoodSupport1;
+	PhysBody3D*  sphere2WoodSupport1body;
+	Sphere       sphere1WoodSupport2;
+	PhysBody3D*  sphere1WoodSupport2body;
+	Cylinder     cylinderWoodSupport2;
+	PhysBody3D*  cylinderWoodSupport2body;
+	Sphere       sphere2WoodSupport2;
+	PhysBody3D*  sphere2WoodSupport2body;
 	//--------------------------------------------//
 	Cylinder     cylinder12;
 	PhysBody3D*  cylinder12body;
