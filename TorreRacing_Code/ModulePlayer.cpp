@@ -142,11 +142,14 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update(float dt)
 {
 	//Reload Game, restart
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
 		vehicle->SetPos(0, 12, 0);
 		vehicle->SetTransform(&original_vehicle_trans);
-		App->scene_intro->first_time_start_sensor = true;
+		vehicle->SetAngularVelocity(0, 0, 0);
+		vehicle->SetLinearVelocity(0, 0, 0);
+		game_timer.Start();
+		game_timer.Stop();
 	}
 
 	/*
