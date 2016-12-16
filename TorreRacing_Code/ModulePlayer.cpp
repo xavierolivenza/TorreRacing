@@ -116,7 +116,7 @@ bool ModulePlayer::Start()
 	//vehicle->SetPos(-300.64, 12, -840);
 
 	//Wood tp
-	vehicle->SetPos(-365.64, 12, -905);
+	//vehicle->SetPos(-365.64, 12, -905);
 
 	//Final line tp
 	//vehicle->SetPos(-488.14, 12, -590);

@@ -79,3 +79,8 @@ void PhysBody3D::SetAngularVelocity(float x, float y, float z)
 {
 	this->body->setAngularVelocity(btVector3(x, y, z));
 }
+
+void PhysBody3D::SetNewMass(float mass)
+{
+	body->setMassProps(mass, btVector3(0,0,0));
+}

@@ -25,6 +25,7 @@ public:
 	void SetAsSensor(bool is_sensor);
 	bool IsSensor() const;
 	void SetAngularVelocity(float x, float y, float z);
+	void SetNewMass(float mass);
 
 private:
 	btRigidBody* body = nullptr;
