@@ -27,8 +27,29 @@ bool ModulePlayer::Start()
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
-	car.chassis_size.Set(2, 0.1, 4);
-	car.chassis_offset.Set(0, 0.8, 0);
+	//car.chassis_size.Set(2, 0.1, 4);
+	//car.chassis_offset.Set(0, 0.8, 0);
+
+	car.num_chassis = 7;
+	car.chassis_size = new vec3[car.num_chassis];
+	car.chassis_size[0].Set(2, 0.1, 4); //SKATE
+	car.chassis_size[1].Set(0.5, 2, 0.5);  //LEG1
+	car.chassis_size[2].Set(0.5, 2, 0.5); //LEG2
+	car.chassis_size[3].Set(0.5, 2, 0.5); //LEG3
+	car.chassis_size[4].Set(0.5, 2, 0.5); //LEG4
+	car.chassis_size[5].Set(1.75, 1.5, 3); //BODY
+	car.chassis_size[6].Set(1, 1, 1); //HEAD
+
+
+	car.chassis_offset = new vec3[car.num_chassis];
+	car.chassis_offset[0].Set(0, 0.8, 0); //SKATE
+	car.chassis_offset[1].Set(-0.5, 1.80, 1); //LEG1
+	car.chassis_offset[2].Set(0.5, 1.80, 1); //LEG2
+	car.chassis_offset[3].Set(-0.5, 1.80, -1); //LEG3
+	car.chassis_offset[4].Set(0.5, 1.80, -1); //LEG4
+	car.chassis_offset[5].Set(0, 3, 0); //BODY
+	car.chassis_offset[6].Set(0, 4.1, 1.8); //HEAD
+
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.88f;
 	car.suspensionCompression = 0.83f;
@@ -45,8 +66,8 @@ bool ModulePlayer::Start()
 
 	// Don't change anything below this line ------------------
 
-	float half_width = car.chassis_size.x*0.5f;
-	float half_length = car.chassis_size.z*0.5f;
+	float half_width = 3*0.5f;
+	float half_length = 5*0.5f;
 	
 	vec3 direction(0,-1,0);
 	vec3 axis(-1,0,0);
