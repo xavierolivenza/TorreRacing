@@ -727,26 +727,26 @@ void ModuleSceneIntro::createChicken(const float x, const float y, const float z
 
 	// -----------------------------------------------------------
 
-	Cube* cube = new Cube(2, 1.3, 1);
+	Cube* cube = new Cube(1.5, 1, 1);
 	cube->color = White;
-	cube->SetPos(x, y + 1.1, z);
+	cube->SetPos(x, y, z);
 	cube->SetRotation(angle, { 0,1,0 });
 	chicken_head.add(cube);
 
-	PhysBody3D* bod = App->physics->AddBody((*cube), 200);
+	PhysBody3D* bod = App->physics->AddBody((*cube), 0);
 	chickenHead_body.add(bod);
 
 	// -----------------------------------------------------------
 
-	Cube* head = new Cube(1, 1, 1);
+	Cube* head = new Cube(0.75, 1, 0.5);
 
 	head->color = White;
 
-	head->SetPos(x + 1, y + 1.6, z);
+	head->SetPos(x + 0.75, y + 0.75, z);
 	head->SetRotation(angle, { 0,1,0 });
 	chicken_head.add(head);
 
-	PhysBody3D* headb = App->physics->AddBody((*cube), 1);
+	PhysBody3D* headb = App->physics->AddBody((*head), 0);
 	chickenHead_body.add(headb);
 
 	App->physics->AddConstraintP2P(*bod, *headb, { 1.0f,0,0.25f }, { -0.45f,-0.5f,0 });
@@ -754,27 +754,27 @@ void ModuleSceneIntro::createChicken(const float x, const float y, const float z
 	// -----------------------------------------------------------
 
 
-	Cylinder* leg1 = new Cylinder(0.25, 0.75);
+	Cylinder* leg1 = new Cylinder(0.10, 0.75);
 
 	leg1->color = Yellow;
-	leg1->SetPos(x - 0.35f, y + 0.25f, z - 0.35);
+	leg1->SetPos(x, y - 0.75, z - 0.3f);
 	leg1->SetRotation(90, { 0,0,1 });
 
 	chicken_legs.add(leg1);
-	PhysBody3D* legg1 = App->physics->AddBody(*leg1, 100);
+	PhysBody3D* legg1 = App->physics->AddBody(*leg1, 0);
 	chickenLegs_body.add(legg1);
 	App->physics->AddConstraintP2P(*bod, *legg1, { -0.35f,-0.5f,-0.35f }, { +0.7f,0,0 });
 
 	// -----------------------------------------------------------
 
-	Cylinder* leg2 = new Cylinder(0.25, 0.75);
+	Cylinder* leg2 = new Cylinder(0.10, 0.75);
 
 	leg2->color = Yellow;
-	leg2->SetPos(x + 0.35f, y + 0.25f, z - 0.35f);
+	leg2->SetPos(x, y - 0.75f, z + 0.3f);
 	leg2->SetRotation(90, { 0,0,1 });
 
 	chicken_legs.add(leg2);
-	PhysBody3D* legg2 = App->physics->AddBody(*leg2, 100);
+	PhysBody3D* legg2 = App->physics->AddBody(*leg2, 0);
 	chickenLegs_body.add(legg2);
 	App->physics->AddConstraintP2P(*bod, *legg2, { +0.35f,-0.5f,-0.35f }, { 0.7f,0,0 });
 
@@ -782,5 +782,5 @@ void ModuleSceneIntro::createChicken(const float x, const float y, const float z
 
 void ModuleSceneIntro::createChickens()
 {
-	createChicken(0, 10, 0, 0, { 0,0,1 });
+	createChicken(0, 6, 10, 0, { 0,0,1 });
 }
