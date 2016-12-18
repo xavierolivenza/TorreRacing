@@ -144,12 +144,7 @@ update_status ModulePlayer::Update(float dt)
 	//Reload Game, restart
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		vehicle->SetPos(0, 12, 0);
-		vehicle->SetTransform(&original_vehicle_trans);
-		vehicle->SetAngularVelocity(0, 0, 0);
-		vehicle->SetLinearVelocity(0, 0, 0);
-		game_timer.Start();
-		game_timer.Stop();
+		RestartGame();
 	}
 
 	/*
@@ -226,9 +221,21 @@ update_status ModulePlayer::Update(float dt)
 				turn -= TURN_DEGREES;
 		}
 
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		{
+			break_timer.Start();
+		}
+
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
-			acceleration = -MAX_ACCELERATION;
+			if (break_timer.Read() * 0.001 <= 3.0f)
+			{
+				acceleration = -MAX_ACCELERATION * 2;
+			}
+			else
+			{
+				acceleration = -MAX_ACCELERATION;
+			}
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
@@ -359,4 +366,16 @@ update_status ModulePlayer::Update(float dt)
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::RestartGame()
+{
+	vehicle->SetPos(0, 12, 0);
+	vehicle->SetTransform(&original_vehicle_trans);
+	vehicle->SetAngularVelocity(0, 0, 0);
+	vehicle->SetLinearVelocity(0, 0, 0);
+	game_timer.Start();
+	game_timer.Stop();
+	App->scene_intro->first_time_start_sensor = true;
+	App->scene_intro->first_time_barn_sensor = true;
 }

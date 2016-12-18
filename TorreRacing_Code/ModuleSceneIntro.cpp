@@ -334,6 +334,15 @@ bool ModuleSceneIntro::Start()
 	cube24body = App->physics->AddBody(cube24, 0);
 	cube24body->SetPos(-488.14, 0, -590);
 	//--------------------------------------------//
+	//Death sensor
+	death_sensor1.size.x = 1500;
+	death_sensor1.size.y = 1;
+	death_sensor1.size.z = 1500;
+	death_sensor1.color = Green;
+	death_sensor1body = App->physics->AddBody(death_sensor1, 0);
+	death_sensor1body->SetAsSensor(true);
+	death_sensor1body->collision_listeners.add(this);
+	death_sensor1body->SetPos(-450, -100, -350);
 
 	//--------------------------------------------//
 	//-----------------Barn parts-----------------//
@@ -618,6 +627,12 @@ update_status ModuleSceneIntro::Update(float dt)
 	cube24body->GetTransform(&cube24.transform);
 	cube24.Render();
 	//--------------------------------------------//
+	//Death sensor
+	if (sensors_debug == true)
+	{
+		death_sensor1body->GetTransform(&death_sensor1.transform);
+		death_sensor1.Render();
+	}
 
 	//--------------------------------------------//
 	//-----------------Barn parts-----------------//
@@ -702,6 +717,10 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		App->player->game_timer.Stop();
 		first_time_barn_sensor = false;
 	}
+	if ((body1 == death_sensor1body) || (body2 == death_sensor1body))
+	{
+		App->player->RestartGame();
+	}
 }
 
 void ModuleSceneIntro::createChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis) {
@@ -765,4 +784,3 @@ void ModuleSceneIntro::createChickens()
 {
 	createChicken(0, 10, 0, 0, { 0,0,1 });
 }
-

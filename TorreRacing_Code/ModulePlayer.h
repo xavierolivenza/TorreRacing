@@ -19,6 +19,8 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
+	void RestartGame();
+
 public:
 
 	PhysVehicle3D* vehicle;
@@ -26,7 +28,6 @@ public:
 	float acceleration;
 	float brake;
 
-	Timer jump_coolddown;
 	Timer game_timer;
 
 	bool freecam = false;
@@ -37,4 +38,7 @@ private:
 
 	btVector3 vehicle_origin_axis;
 
+	Timer jump_coolddown;
+	
+	Timer break_timer;
 };
