@@ -39,9 +39,9 @@ void PhysVehicle3D::Render()
 	}
 
 	Cube chassis;
-	chassis.color = White;
 	for (int i = 0; i < info.num_chassis; ++i)
 	{
+		chassis.color = info.color_parts[i];
 		chassis.size = { info.chassis_size[i].x, info.chassis_size[i].y, info.chassis_size[i].z };
 		vehicle->getChassisWorldTransform().getOpenGLMatrix(&chassis.transform);
 		btQuaternion q = vehicle->getChassisWorldTransform().getRotation();

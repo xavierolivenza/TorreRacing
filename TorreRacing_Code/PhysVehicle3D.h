@@ -2,8 +2,10 @@
 
 #include "PhysBody3D.h"
 #include "glmath.h"
+#include "p2DynArray.h"
 
 class btRaycastVehicle;
+struct Color;
 struct PhysBody3D;
 
 struct Wheel
@@ -26,6 +28,8 @@ struct VehicleInfo
 	
 	vec3* chassis_size;
 	vec3* chassis_offset;
+
+	p2DynArray<Color> color_parts;
 
 	uint num_chassis;
 
