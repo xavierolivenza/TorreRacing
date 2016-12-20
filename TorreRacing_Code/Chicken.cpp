@@ -8,9 +8,9 @@ Chicken::Chicken()
 
 }
 
-Chicken::Chicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis, ModuleSceneIntro* This)
+Chicken::Chicken(const float x, const float y, const float z, ModuleSceneIntro* This)
 {
-	CreateGraphicChicken(x, y, z, angle, RotationAxis, This);
+	CreateGraphicChicken(x, y, z, This);
 }
 
 Chicken::~Chicken()
@@ -18,7 +18,7 @@ Chicken::~Chicken()
 
 }
 
-void Chicken::CreateGraphicChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis, ModuleSceneIntro* This)
+void Chicken::CreateGraphicChicken(const float x, const float y, const float z, ModuleSceneIntro* This)
 {
 
 	// -----------------------------------------------------------
@@ -28,7 +28,7 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	Body.size.z = 1;
 	Body.color = White;
 	Body.SetPos(x, y, z);
-	Body.SetRotation(angle, RotationAxis);
+	Body.SetRotation(0, { 0,1,0 });
 
 	// -----------------------------------------------------------
 
@@ -37,7 +37,7 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	Head.size.z = 0.5;
 	Head.color = White;
 	Head.SetPos(x + 0.75, y + 0.75, z);
-	Head.SetRotation(angle, RotationAxis);
+	Head.SetRotation(0, { 0,1,0 });
 
 	// -----------------------------------------------------------
 

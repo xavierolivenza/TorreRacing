@@ -12,7 +12,7 @@ class Chicken
 public:
 
 	Chicken();
-	Chicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis, ModuleSceneIntro* This);
+	Chicken(const float x, const float y, const float z, ModuleSceneIntro* This);
 	~Chicken();
 
 private:
@@ -38,8 +38,10 @@ public:
 	void RenderChicken();
 	const PhysBody3D* GetSensorBody() const;
 
+	bool firsttime = true;
+
 private:
 
-	void CreateGraphicChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis, ModuleSceneIntro* This);
+	void CreateGraphicChicken(const float x, const float y, const float z, ModuleSceneIntro* This);
 
 };

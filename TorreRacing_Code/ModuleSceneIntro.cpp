@@ -421,8 +421,8 @@ bool ModuleSceneIntro::Start()
 	//--------------------------------------------//
 	//------------------Chickens------------------//
 	//--------------------------------------------//
-	chickens_dynamic_array.PushBack(new Chicken(0, 6, 10, 0, { 0,1,0 }, this));
-	chickens_dynamic_array.PushBack(new Chicken(0, 6, 20, 0, { 0,1,0 }, this));
+	chickens_dynamic_array.PushBack(new Chicken(0, 6, 10, this));
+	chickens_dynamic_array.PushBack(new Chicken(0, 6, 20, this));
 	//--------------------------------------------//
 
 	return ret;
@@ -714,7 +714,6 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	}
 
 	//Chickens sensors
-	/*
 	const PhysBody3D* chicken_sensor;
 	uint chickens_dynamic_array_count = chickens_dynamic_array.Count();
 	for (int i = 0; i < chickens_dynamic_array_count; i++)
@@ -722,8 +721,11 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		chicken_sensor = chickens_dynamic_array[i]->GetSensorBody();
 		if ((body1 == chicken_sensor) || (body2 == chicken_sensor))
 		{
-			chickens_dynamic_array[i]->CreatePhysicChicken();
+			if (chickens_dynamic_array[i]->firsttime == true)
+			{
+				//chickens_dynamic_array[i]->CreatePhysicChicken();
+				chickens_dynamic_array[i]->firsttime = false;
+			}
 		}
 	}
-	*/
 }
