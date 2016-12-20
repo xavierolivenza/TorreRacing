@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "PhysVehicle3D.h"
 #include "PhysBody3D.h"
+#include "ModuleAudio.h"
 
 #define FRONT_IMPULSE 10000.0f
 #define LATERAL_IMPULSE 5000.0f
@@ -23,6 +24,8 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
+
+	COW_fx = App->audio->LoadFx("sounds/COW.wav");
 
 	VehicleInfo car;
 
@@ -352,10 +355,13 @@ update_status ModulePlayer::Update(float dt)
 		//Jump
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
+			
 			if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
 			{
 				vehicle->Push(0.0f, 5000.0f, 0.0f);
 				jump_coolddown.Start();
+				
+				App->audio->PlayFx(COW_fx);
 			}
 		}
 	}

@@ -28,6 +28,8 @@ public:
 	float acceleration;
 	float brake;
 
+	uint COW_fx;
+
 	Timer game_timer;
 
 	bool freecam = false;

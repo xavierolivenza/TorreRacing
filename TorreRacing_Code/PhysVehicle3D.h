@@ -31,6 +31,8 @@ struct VehicleInfo
 
 	p2DynArray<Color> color_parts;
 
+	
+
 	uint num_chassis;
 
 	float mass;
