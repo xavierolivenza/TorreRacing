@@ -21,6 +21,8 @@ Chicken::~Chicken()
 void Chicken::CreateGraphicChicken(const float x, const float y, const float z, ModuleSceneIntro* This)
 {
 
+	OriginalPosition.Set(x, y, z);
+
 	// -----------------------------------------------------------
 
 	Body.size.x = 1.5;
@@ -126,4 +128,42 @@ void Chicken::RenderChicken()
 const PhysBody3D* Chicken::GetSensorBody() const
 {
 	return chicken_sensor_body;
+}
+
+void Chicken::RestartChicken()
+{
+
+	//need to restart angular and linear velocity of bodies
+	//need to destroy bodies of chickens created
+
+	int x = 0;
+	int y = 0;
+	int z = 0;
+
+	x = OriginalPosition.x;
+	y = OriginalPosition.y;
+	z = OriginalPosition.z;
+
+	Body.SetPos(x, y, z);
+	Body.SetRotation(0, { 0,1,0 });
+
+	// -----------------------------------------------------------
+
+	Head.SetPos(x + 0.75, y + 0.75, z);
+	Head.SetRotation(0, { 0,1,0 });
+
+	// -----------------------------------------------------------
+
+	Leg1.SetPos(x, y - 0.75, z - 0.3f);
+	Leg1.SetRotation(90, { 0,0,1 });
+
+	// -----------------------------------------------------------
+
+	Leg2.SetPos(x, y - 0.75, z + 0.3f);
+	Leg2.SetRotation(90, { 0,0,1 });
+
+	// -----------------------------------------------------------
+
+	chicken_sensor.SetPos(x, y, z);
+
 }

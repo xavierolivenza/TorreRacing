@@ -32,11 +32,15 @@ private:
 	bool GraphicChickeniscreated = false;
 	bool isphysic = false;
 
+	vec3 OriginalPosition;
+
 public:
 
 	void CreatePhysicChicken();
 	void RenderChicken();
 	const PhysBody3D* GetSensorBody() const;
+
+	void RestartChicken();
 
 	bool firsttime = true;
 
