@@ -3,11 +3,11 @@
 #include "p2DynArray.h"
 #include "Globals.h"
 #include "Primitive.h"
-
-#define MAX_SNAKE 2
+#include "Chicken.h"
 
 struct PhysBody3D;
 struct PhysMotor3D;
+class Chicken;
 
 class ModuleSceneIntro : public Module
 {
@@ -198,11 +198,14 @@ private:
 	PhysBody3D*  barn_wall_7_body;
 	Cube		 barn_wall_8;
 	PhysBody3D*  barn_wall_8_body;
+	//--------------------------------------------//
 	
-	p2List<Cube*> chicken_head;
-	p2List<PhysBody3D*> chickenHead_body;
-	p2List<PhysBody3D*> chickenLegs_body;
-	p2List<Cylinder*> chicken_legs;
+	//--------------------------------------------//
+	//------------------Chickens------------------//
+	//--------------------------------------------//
+	Chicken* chicken1;
+	Chicken* chicken2;
+	//--------------------------------------------//
 
 	bool sensors_debug = true;
 
@@ -210,8 +213,5 @@ public:
 
 	bool first_time_start_sensor = true;
 	bool first_time_barn_sensor = true;
-
-	void createChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis);
-	void createChickens();
 
 };

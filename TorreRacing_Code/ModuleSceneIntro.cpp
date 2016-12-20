@@ -416,7 +416,12 @@ bool ModuleSceneIntro::Start()
 	barn_wall_8_body = App->physics->AddBody(barn_wall_8, 0);
 	barn_wall_8_body->SetPos(-481.14, 6, -340.5 - 4.5);
 
-	createChickens();
+	//--------------------------------------------//
+	//------------------Chickens------------------//
+	//--------------------------------------------//
+	chicken1->CreateGraphicChicken(0, 6, 10,  0, { 0,1,0 }, this);
+	chicken2->CreateGraphicChicken(0, 6, 20, 90, { 0,1,0 }, this);
+	//--------------------------------------------//
 
 	return ret;
 }
@@ -432,8 +437,12 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		cylinder1body->SetNewMass(20);
+	}
+	
 	/*
-	//code to manually adjust some pieces
 	float a = 0;
 	float b = 0;
 	float c = 0;
@@ -664,38 +673,8 @@ update_status ModuleSceneIntro::Update(float dt)
 	barn_wall_8.Render();
 
 	//render Chickens
-
-	
-
-	p2List_item<Cylinder*>* iteratorlegs;
-	p2List_item<Cube*>* iteratorbody;
-
-	p2List_item<PhysBody3D*>* iteratorchicken_legs_body;
-	p2List_item<PhysBody3D*>* iteratorchicken_head_body;
-
-	iteratorlegs = chicken_legs.getFirst();
-	iteratorbody = chicken_head.getFirst();
-
-	iteratorchicken_legs_body = chickenLegs_body.getFirst();
-	iteratorchicken_head_body = chickenHead_body.getFirst();
-
-	while (iteratorlegs != nullptr)
-	{
-		iteratorchicken_legs_body->data->GetTransform(&(iteratorlegs->data->transform));
-		iteratorlegs->data->Render();
-
-		iteratorchicken_legs_body = iteratorchicken_legs_body->next;
-		iteratorlegs = iteratorlegs->next;
-	}
-
-	while (iteratorbody != nullptr)
-	{
-		iteratorchicken_head_body->data->GetTransform(&(iteratorbody->data->transform));
-		iteratorbody->data->Render();
-
-		iteratorchicken_head_body = iteratorchicken_head_body->next;
-		iteratorbody = iteratorbody->next;
-	}
+	chicken1->RenderChicken();
+	chicken2->RenderChicken();
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
@@ -721,66 +700,19 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	{
 		App->player->RestartGame();
 	}
-}
 
-void ModuleSceneIntro::createChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis) {
-
-	// -----------------------------------------------------------
-
-	Cube* cube = new Cube(1.5, 1, 1);
-	cube->color = White;
-	cube->SetPos(x, y, z);
-	cube->SetRotation(angle, { 0,1,0 });
-	chicken_head.add(cube);
-
-	PhysBody3D* bod = App->physics->AddBody((*cube), 0);
-	chickenHead_body.add(bod);
-
-	// -----------------------------------------------------------
-
-	Cube* head = new Cube(0.75, 1, 0.5);
-
-	head->color = White;
-
-	head->SetPos(x + 0.75, y + 0.75, z);
-	head->SetRotation(angle, { 0,1,0 });
-	chicken_head.add(head);
-
-	PhysBody3D* headb = App->physics->AddBody((*head), 0);
-	chickenHead_body.add(headb);
-
-	App->physics->AddConstraintP2P(*bod, *headb, { 1.0f,0,0.25f }, { -0.45f,-0.5f,0 });
-
-	// -----------------------------------------------------------
+	//Chickens
+	const PhysBody3D* chicken_sensor;
+	chicken_sensor = chicken1->GetSensorBody();
+	if ((body1 == chicken_sensor) || (body2 == chicken_sensor))
+	{
+		//chicken1.CreateGraphicChicken();
+	}
+	chicken_sensor = chicken2->GetSensorBody();
+	if ((body1 == chicken_sensor) || (body2 == chicken_sensor))
+	{
+		//chicken2.CreateGraphicChicken();
+	}
 
 
-	Cylinder* leg1 = new Cylinder(0.10, 0.75);
-
-	leg1->color = Yellow;
-	leg1->SetPos(x, y - 0.75, z - 0.3f);
-	leg1->SetRotation(90, { 0,0,1 });
-
-	chicken_legs.add(leg1);
-	PhysBody3D* legg1 = App->physics->AddBody(*leg1, 0);
-	chickenLegs_body.add(legg1);
-	App->physics->AddConstraintP2P(*bod, *legg1, { -0.35f,-0.5f,-0.35f }, { +0.7f,0,0 });
-
-	// -----------------------------------------------------------
-
-	Cylinder* leg2 = new Cylinder(0.10, 0.75);
-
-	leg2->color = Yellow;
-	leg2->SetPos(x, y - 0.75f, z + 0.3f);
-	leg2->SetRotation(90, { 0,0,1 });
-
-	chicken_legs.add(leg2);
-	PhysBody3D* legg2 = App->physics->AddBody(*leg2, 0);
-	chickenLegs_body.add(legg2);
-	App->physics->AddConstraintP2P(*bod, *legg2, { +0.35f,-0.5f,-0.35f }, { 0.7f,0,0 });
-
-}
-
-void ModuleSceneIntro::createChickens()
-{
-	createChicken(0, 6, 10, 0, { 0,0,1 });
 }
