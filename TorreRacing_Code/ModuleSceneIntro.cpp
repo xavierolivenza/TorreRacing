@@ -713,9 +713,9 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		App->player->RestartGame();
 	}
 
-	//Chickens
+	//Chickens sensors
+	/*
 	const PhysBody3D* chicken_sensor;
-
 	uint chickens_dynamic_array_count = chickens_dynamic_array.Count();
 	for (int i = 0; i < chickens_dynamic_array_count; i++)
 	{
@@ -725,4 +725,5 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 			chickens_dynamic_array[i]->CreatePhysicChicken();
 		}
 	}
+	*/
 }
