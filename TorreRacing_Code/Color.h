@@ -55,3 +55,7 @@ extern Color Maroon;
 extern Color Crimson;
 extern Color FireBrick;
 extern Color DarkRed;
+
+//Yellows
+
+extern Color LightYellow;

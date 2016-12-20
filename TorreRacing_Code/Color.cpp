@@ -27,3 +27,5 @@ Color Maroon =				 Color(0.50f, 0.00f, 0.00f);
 Color Crimson =				 Color(0.86f, 0.08f, 0.24f);
 Color FireBrick =			 Color(0.70f, 0.13f, 0.13f);
 Color DarkRed =				 Color(0.55f, 0.00f, 0.00f);
+
+Color LightYellow =			 Color(1.00F, 1.00F, 0.88F);

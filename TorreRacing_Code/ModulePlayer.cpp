@@ -33,32 +33,56 @@ bool ModulePlayer::Start()
 	//car.chassis_size.Set(2, 0.1, 4);
 	//car.chassis_offset.Set(0, 0.8, 0);
 
-	car.num_chassis = 7;
+	car.num_chassis = 15;
 	car.chassis_size = new vec3[car.num_chassis];
-	car.chassis_size[0].Set(2, 0.1, 4);			//SKATE
-	car.chassis_size[1].Set(0.5, 2, 0.5);		//LEG1
-	car.chassis_size[2].Set(0.5, 2, 0.5);		//LEG2
-	car.chassis_size[3].Set(0.5, 2, 0.5);		//LEG3
-	car.chassis_size[4].Set(0.5, 2, 0.5);		//LEG4
-	car.chassis_size[5].Set(1.75, 1.5, 3);		//BODY
+	car.chassis_size[0].Set(2.5, 0.1, 5);		//SKATE
+	car.chassis_size[1].Set(0.5, 0.7, 0.5);		//LEG1
+	car.chassis_size[2].Set(0.5, 0.7, 0.5);		//LEG2
+	car.chassis_size[3].Set(0.5, 0.7, 0.5);		//LEG3
+	car.chassis_size[4].Set(0.5, 0.7, 0.5);		//LEG4
+	car.chassis_size[5].Set(1.55, 1.5, 2.8);	//BODY
 	car.chassis_size[6].Set(1, 1, 1);			//HEAD
+	car.chassis_size[7].Set(0.15, 0.15, 0.15);	//EYE1
+	car.chassis_size[8].Set(0.15, 0.15, 0.15);	//EYE2
+	car.chassis_size[9].Set(1.75, 0.1, 1.5);	//SKATEF
+	car.chassis_size[10].Set(1.75, 0.1, 1.5);	//SKATEB
+	car.chassis_size[11].Set(0.3, 0.2, 0.2);	//HORN1
+	car.chassis_size[12].Set(0.125, 0.3, 0.125);//HORN11
+	car.chassis_size[13].Set(0.3, 0.2, 0.2);	//HORN2
+	car.chassis_size[14].Set(0.125, 0.3, 0.125);//HORN22
 
 	car.color_parts.PushBack(Blue);				//SKATE
-	car.color_parts.PushBack(Brown);			//LEG1
-	car.color_parts.PushBack(Brown);			//LEG2
-	car.color_parts.PushBack(Brown);			//LEG3
-	car.color_parts.PushBack(Brown);			//LEG4
-	car.color_parts.PushBack(Brown);			//BODY
-	car.color_parts.PushBack(Brown);			//HEAD
+	car.color_parts.PushBack(SaddleBrown);		//LEG1
+	car.color_parts.PushBack(SaddleBrown);		//LEG2
+	car.color_parts.PushBack(SaddleBrown);		//LEG3
+	car.color_parts.PushBack(SaddleBrown);		//LEG4
+	car.color_parts.PushBack(SaddleBrown);		//BODY
+	car.color_parts.PushBack(SaddleBrown);		//HEAD
+	car.color_parts.PushBack(Black);			//EYE1
+	car.color_parts.PushBack(Black);			//EYE2
+	car.color_parts.PushBack(Blue);				//SKATEF
+	car.color_parts.PushBack(Blue);				//SKATEB
+	car.color_parts.PushBack(LightYellow);		//HORN1
+	car.color_parts.PushBack(LightYellow);		//HORN11
+	car.color_parts.PushBack(LightYellow);		//HORN2
+	car.color_parts.PushBack(LightYellow);		//HORN22
 
 	car.chassis_offset = new vec3[car.num_chassis];
 	car.chassis_offset[0].Set(0, 0.8, 0);		//SKATE
-	car.chassis_offset[1].Set(-0.5, 1.80, 1);	//LEG1
-	car.chassis_offset[2].Set(0.5, 1.80, 1);	//LEG2
-	car.chassis_offset[3].Set(-0.5, 1.80, -1);	//LEG3
-	car.chassis_offset[4].Set(0.5, 1.80, -1);	//LEG4
-	car.chassis_offset[5].Set(0, 3, 0);			//BODY
-	car.chassis_offset[6].Set(0, 4.1, 1.8);		//HEAD
+	car.chassis_offset[1].Set(-0.5, 1.10, 1);	//LEG1
+	car.chassis_offset[2].Set(0.5, 1.10, 1);	//LEG2
+	car.chassis_offset[3].Set(-0.5, 1.10, -1);	//LEG3
+	car.chassis_offset[4].Set(0.5, 1.10, -1);	//LEG4
+	car.chassis_offset[5].Set(0, 2.1, 0);		//BODY
+	car.chassis_offset[6].Set(0, 3.2, 1.6);		//HEAD
+	car.chassis_offset[7].Set(-0.2, 3.5, 2.1);	//EYE1
+	car.chassis_offset[8].Set(0.2, 3.5, 2.1);	//EYE2
+	car.chassis_offset[9].Set(0, 0.8, 2.5);		//SKATEF
+	car.chassis_offset[10].Set(0, 0.8, -2.5);	//SKATEB
+	car.chassis_offset[11].Set(0.6, 3.4, 1.7);	//HORN1
+	car.chassis_offset[12].Set(0.75, 3.5, 1.7);	//HORN11
+	car.chassis_offset[13].Set(-0.6, 3.4, 1.7);	//HORN2
+	car.chassis_offset[14].Set(-0.75, 3.5, 1.7);	//HORN22
 
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.88f;
@@ -86,7 +110,7 @@ bool ModulePlayer::Start()
 	car.wheels = new Wheel[4];
 
 	// FRONT-LEFT ------------------------
-	car.wheels[0].connection.Set(half_width + 0.55 * wheel_width, connection_height, half_length - wheel_radius);
+	car.wheels[0].connection.Set(half_width + 0 * wheel_width, connection_height, half_length - wheel_radius);
 	car.wheels[0].direction = direction;
 	car.wheels[0].axis = axis;
 	car.wheels[0].suspensionRestLength = suspensionRestLength;
@@ -98,7 +122,7 @@ bool ModulePlayer::Start()
 	car.wheels[0].steering = true;
 
 	// FRONT-RIGHT ------------------------
-	car.wheels[1].connection.Set(-half_width - 0.55 * wheel_width, connection_height, half_length - wheel_radius);
+	car.wheels[1].connection.Set(-half_width - 0 * wheel_width, connection_height, half_length - wheel_radius);
 	car.wheels[1].direction = direction;
 	car.wheels[1].axis = axis;
 	car.wheels[1].suspensionRestLength = suspensionRestLength;
@@ -110,7 +134,7 @@ bool ModulePlayer::Start()
 	car.wheels[1].steering = true;
 
 	// REAR-LEFT ------------------------
-	car.wheels[2].connection.Set(half_width + 0.55 * wheel_width, connection_height, -half_length + wheel_radius);
+	car.wheels[2].connection.Set(half_width + 0 * wheel_width, connection_height, -half_length + wheel_radius);
 	car.wheels[2].direction = direction;
 	car.wheels[2].axis = axis;
 	car.wheels[2].suspensionRestLength = suspensionRestLength;
@@ -122,7 +146,7 @@ bool ModulePlayer::Start()
 	car.wheels[2].steering = false;
 
 	// REAR-RIGHT ------------------------
-	car.wheels[3].connection.Set(-half_width - 0.55 * wheel_width, connection_height, -half_length + wheel_radius);
+	car.wheels[3].connection.Set(-half_width - 0 * wheel_width, connection_height, -half_length + wheel_radius);
 	car.wheels[3].direction = direction;
 	car.wheels[3].axis = axis;
 	car.wheels[3].suspensionRestLength = suspensionRestLength;
