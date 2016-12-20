@@ -10,10 +10,10 @@ private :
 
 public:
 
-	Application* App;
+	Module(Application* parent, bool start_enabled = true) : enabled(start_enabled)
+	{
 
-	Module(Application* parent, bool start_enabled = true) : App(parent)
-	{}
+	}
 
 	virtual ~Module()
 	{}

@@ -1,7 +1,6 @@
 #include "Chicken.h"
 
-#include "Globals.h"
-#include "Module.h"
+#include "Application.h"
 #include "ModulePhysics3D.h"
 
 Chicken::Chicken()
@@ -62,12 +61,10 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	chicken_sensor.color = Green;
 	chicken_sensor.SetPos(x, y, z);
 
-	/*
 	chicken_sensor_body = App->physics->AddBody(chicken_sensor, 0);
 	chicken_sensor_body->SetAsSensor(true);
 	chicken_sensor_body->collision_listeners.add(This);
 	chicken_sensor_body->SetPos(x, y, z);
-	*/
 
 	GraphicChickeniscreated = true;
 
@@ -77,31 +74,29 @@ void Chicken::CreatePhysicChicken()
 {
 	if (GraphicChickeniscreated == true)
 	{
-		/*
 		// -----------------------------------------------------------
 
-		BodyBody = App->physics->AddBody((*Body), 0);
+		BodyBody = App->physics->AddBody((Body), 10);
 
 		// -----------------------------------------------------------
 
-		HeadBody = App->physics->AddBody((*Head), 0);
+		HeadBody = App->physics->AddBody((Head), 10);
 
 		App->physics->AddConstraintP2P(*BodyBody, *HeadBody, { 1.0f,0,0.25f }, { -0.45f,-0.5f,0 });
 
 		// -----------------------------------------------------------
 
-		Leg1Body = App->physics->AddBody(*Leg1, 0);
+		Leg1Body = App->physics->AddBody(Leg1, 10);
 
 		App->physics->AddConstraintP2P(*BodyBody, *Leg1Body, { -0.35f,-0.5f,-0.35f }, { +0.7f,0,0 });
 
 		// -----------------------------------------------------------
 
-		Leg2Body = App->physics->AddBody(*Leg2, 0);
+		Leg2Body = App->physics->AddBody(Leg2, 10);
 
 		App->physics->AddConstraintP2P(*BodyBody, *Leg2Body, { +0.35f,-0.5f,-0.35f }, { 0.7f,0,0 });
 
 		// -----------------------------------------------------------
-		*/
 		isphysic = true;
 	}
 }
@@ -110,13 +105,11 @@ void Chicken::RenderChicken()
 {
 	//uncomment it to temporal sensor visual
 	//chicken_sensor.Render();
-	/*
 	if (App->scene_intro->sensors_debug == true)
 	{
 		chicken_sensor_body->GetTransform(&chicken_sensor.transform);
 		chicken_sensor.Render();
 	}
-	*/
 	if (isphysic == true)
 	{
 		HeadBody->GetTransform(&Head.transform);
