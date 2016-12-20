@@ -21,7 +21,7 @@ Chicken::~Chicken()
 
 void Chicken::CreateGraphicChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis, ModuleSceneIntro* This)
 {
-	/*
+
 	// -----------------------------------------------------------
 
 	Body.size.x = 1.5;
@@ -46,7 +46,7 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	Leg1.height = 0.75;
 	Leg1.color = Yellow;
 	Leg1.SetPos(x, y - 0.75, z - 0.3f);
-	Leg1.SetRotation(angle, RotationAxis);
+	Leg1.SetRotation(90, { 0,0,1 });
 
 	// -----------------------------------------------------------
 
@@ -54,12 +54,14 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	Leg2.height = 0.75;
 	Leg2.color = Yellow;
 	Leg2.SetPos(x, y - 0.75, z + 0.3f);
-	Leg2.SetRotation(angle, RotationAxis);
+	Leg2.SetRotation(90, { 0,0,1 });
 
 	// -----------------------------------------------------------
-	*/
-	//chicken_sensor.radius = 1;
-	//chicken_sensor.color = Green;
+
+	chicken_sensor.radius = 1;
+	chicken_sensor.color = Green;
+	chicken_sensor.SetPos(x, y, z);
+
 	/*
 	chicken_sensor_body = App->physics->AddBody(chicken_sensor, 0);
 	chicken_sensor_body->SetAsSensor(true);
@@ -67,13 +69,13 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	chicken_sensor_body->SetPos(x, y, z);
 	*/
 
-	//GraphicChickeniscreated = true;
+	GraphicChickeniscreated = true;
 
 }
 
 void Chicken::CreatePhysicChicken()
 {
-	//if (GraphicChickeniscreated == true)
+	if (GraphicChickeniscreated == true)
 	{
 		/*
 		// -----------------------------------------------------------
@@ -100,12 +102,13 @@ void Chicken::CreatePhysicChicken()
 
 		// -----------------------------------------------------------
 		*/
-		//isphysic = true;
+		isphysic = true;
 	}
 }
 
 void Chicken::RenderChicken()
 {
+	//uncomment it to temporal sensor visual
 	//chicken_sensor.Render();
 	/*
 	if (App->scene_intro->sensors_debug == true)
@@ -114,7 +117,6 @@ void Chicken::RenderChicken()
 		chicken_sensor.Render();
 	}
 	*/
-	/*
 	if (isphysic == true)
 	{
 		HeadBody->GetTransform(&Head.transform);
@@ -126,10 +128,9 @@ void Chicken::RenderChicken()
 	Body.Render();
 	Leg1.Render();
 	Leg2.Render();
-	*/
 }
 
 const PhysBody3D* Chicken::GetSensorBody() const
 {
-	return nullptr; // chicken_sensor_body;
+	return chicken_sensor_body;
 }

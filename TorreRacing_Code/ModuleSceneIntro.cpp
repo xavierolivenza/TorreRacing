@@ -419,8 +419,8 @@ bool ModuleSceneIntro::Start()
 	//--------------------------------------------//
 	//------------------Chickens------------------//
 	//--------------------------------------------//
-	chicken1->CreateGraphicChicken(0, 6, 10,  0, { 0,1,0 }, this);
-	chicken2->CreateGraphicChicken(0, 6, 20, 90, { 0,1,0 }, this);
+	chickens_dynamic_array.PushBack(new Chicken(0, 6, 10, 0, { 0,1,0 }, this));
+	chickens_dynamic_array.PushBack(new Chicken(0, 6, 20, 0, { 0,1,0 }, this));
 	//--------------------------------------------//
 
 	return ret;
@@ -430,6 +430,13 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
+
+	uint chickens_dynamic_array_count = chickens_dynamic_array.Count();
+	for (int i = 0; i < chickens_dynamic_array_count; i++)
+	{
+		delete chickens_dynamic_array[i];
+	}
+	chickens_dynamic_array.Clear();
 
 	return true;
 }
@@ -673,8 +680,11 @@ update_status ModuleSceneIntro::Update(float dt)
 	barn_wall_8.Render();
 
 	//render Chickens
-	chicken1->RenderChicken();
-	chicken2->RenderChicken();
+	uint chickens_dynamic_array_count = chickens_dynamic_array.Count();
+	for (int i = 0; i < chickens_dynamic_array_count; i++)
+	{
+		chickens_dynamic_array[i]->RenderChicken();
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
@@ -703,16 +713,14 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
 	//Chickens
 	const PhysBody3D* chicken_sensor;
-	chicken_sensor = chicken1->GetSensorBody();
-	if ((body1 == chicken_sensor) || (body2 == chicken_sensor))
-	{
-		//chicken1.CreateGraphicChicken();
-	}
-	chicken_sensor = chicken2->GetSensorBody();
-	if ((body1 == chicken_sensor) || (body2 == chicken_sensor))
-	{
-		//chicken2.CreateGraphicChicken();
-	}
 
-
+	uint chickens_dynamic_array_count = chickens_dynamic_array.Count();
+	for (int i = 0; i < chickens_dynamic_array_count; i++)
+	{
+		chicken_sensor = chickens_dynamic_array[i]->GetSensorBody();
+		if ((body1 == chicken_sensor) || (body2 == chicken_sensor))
+		{
+			chickens_dynamic_array[i]->CreatePhysicChicken();
+		}
+	}
 }

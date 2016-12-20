@@ -203,8 +203,7 @@ private:
 	//--------------------------------------------//
 	//------------------Chickens------------------//
 	//--------------------------------------------//
-	Chicken* chicken1;
-	Chicken* chicken2;
+	p2DynArray<Chicken*> chickens_dynamic_array;
 	//--------------------------------------------//
 
 	bool sensors_debug = true;

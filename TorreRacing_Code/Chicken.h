@@ -34,10 +34,12 @@ private:
 
 public:
 
-	void CreateGraphicChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis, ModuleSceneIntro* This);
 	void CreatePhysicChicken();
 	void RenderChicken();
-
 	const PhysBody3D* GetSensorBody() const;
+
+private:
+
+	void CreateGraphicChicken(const float x, const float y, const float z, const float angle, const vec3 RotationAxis, ModuleSceneIntro* This);
 
 };
