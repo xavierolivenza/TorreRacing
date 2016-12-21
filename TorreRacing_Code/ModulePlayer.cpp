@@ -293,7 +293,9 @@ update_status ModulePlayer::Update(float dt)
 
 	if (freecam == false)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		int Vehicle_Velocity = App->player->vehicle->GetKmh();
+
+		if ((App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) && (Vehicle_Velocity <= SPEED_LIMIT))
 		{
 			acceleration = MAX_ACCELERATION;
 		}
@@ -315,7 +317,7 @@ update_status ModulePlayer::Update(float dt)
 			break_timer.Start();
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		if ((App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) && (Vehicle_Velocity >= -SPEED_LIMIT))
 		{
 			if (break_timer.Read() * 0.001 <= 3.0f)
 			{
