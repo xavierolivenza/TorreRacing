@@ -10,7 +10,7 @@ Chicken::Chicken()
 
 Chicken::Chicken(const float x, const float y, const float z, ModuleSceneIntro* This)
 {
-	CreateGraphicChicken(x, y, z, This);
+	CreateChicken(x, y, z, This);
 }
 
 Chicken::~Chicken()
@@ -18,7 +18,7 @@ Chicken::~Chicken()
 
 }
 
-void Chicken::CreateGraphicChicken(const float x, const float y, const float z, ModuleSceneIntro* This)
+void Chicken::CreateChicken(const float x, const float y, const float z, ModuleSceneIntro* This)
 {
 
 	OriginalPosition.Set(x, y, z);
@@ -32,6 +32,9 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	Body.SetPos(x, y, z);
 	Body.SetRotation(0, { 0,1,0 });
 
+	BodyBody = App->physics->AddBody((Body), 10);
+	BodyBody->Freeze(true);
+
 	// -----------------------------------------------------------
 
 	Head.size.x = 0.75;
@@ -41,6 +44,11 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	Head.SetPos(x + 0.75, y + 0.75, z);
 	Head.SetRotation(0, { 0,1,0 });
 
+	HeadBody = App->physics->AddBody((Head), 10);
+	HeadBody->Freeze(true);
+	
+	App->physics->AddConstraintP2P(*BodyBody, *HeadBody, { 1.0f,0,0.25f }, { -0.45f,-0.5f,0 });
+
 	// -----------------------------------------------------------
 
 	Leg1.radius = 0.1;
@@ -49,6 +57,11 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	Leg1.SetPos(x, y - 0.75, z - 0.3f);
 	Leg1.SetRotation(90, { 0,0,1 });
 
+	Leg1Body = App->physics->AddBody(Leg1, 10);
+	Leg1Body->Freeze(true);
+
+	App->physics->AddConstraintP2P(*BodyBody, *Leg1Body, { -0.35f,-0.5f,-0.35f }, { +0.7f,0,0 });
+
 	// -----------------------------------------------------------
 
 	Leg2.radius = 0.1;
@@ -56,6 +69,12 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	Leg2.color = Yellow;
 	Leg2.SetPos(x, y - 0.75, z + 0.3f);
 	Leg2.SetRotation(90, { 0,0,1 });
+
+	Leg2Body = App->physics->AddBody(Leg2, 10);
+	Leg2Body->Freeze(true);
+
+	App->physics->AddConstraintP2P(*BodyBody, *Leg2Body, { +0.35f,-0.5f,-0.35f }, { 0.7f,0,0 });
+
 
 	// -----------------------------------------------------------
 
@@ -68,57 +87,27 @@ void Chicken::CreateGraphicChicken(const float x, const float y, const float z, 
 	chicken_sensor_body->collision_listeners.add(This);
 	chicken_sensor_body->SetPos(x, y, z);
 
-	GraphicChickeniscreated = true;
-
 }
 
-void Chicken::CreatePhysicChicken()
+void Chicken::ActivateChicken()
 {
-	if (GraphicChickeniscreated == true)
-	{
-		// -----------------------------------------------------------
-
-		BodyBody = App->physics->AddBody((Body), 10);
-
-		// -----------------------------------------------------------
-
-		HeadBody = App->physics->AddBody((Head), 10);
-
-		App->physics->AddConstraintP2P(*BodyBody, *HeadBody, { 1.0f,0,0.25f }, { -0.45f,-0.5f,0 });
-
-		// -----------------------------------------------------------
-
-		Leg1Body = App->physics->AddBody(Leg1, 10);
-
-		App->physics->AddConstraintP2P(*BodyBody, *Leg1Body, { -0.35f,-0.5f,-0.35f }, { +0.7f,0,0 });
-
-		// -----------------------------------------------------------
-
-		Leg2Body = App->physics->AddBody(Leg2, 10);
-
-		App->physics->AddConstraintP2P(*BodyBody, *Leg2Body, { +0.35f,-0.5f,-0.35f }, { 0.7f,0,0 });
-
-		// -----------------------------------------------------------
-		isphysic = true;
-	}
+	BodyBody->Freeze(false);
+	HeadBody->Freeze(false);
+	Leg1Body->Freeze(false);
+	Leg2Body->Freeze(false);
 }
 
 void Chicken::RenderChicken()
 {
-	//uncomment it to temporal sensor visual
-	//chicken_sensor.Render();
 	if (App->scene_intro->sensors_debug == true)
 	{
 		chicken_sensor_body->GetTransform(&chicken_sensor.transform);
 		chicken_sensor.Render();
 	}
-	if (isphysic == true)
-	{
-		HeadBody->GetTransform(&Head.transform);
-		BodyBody->GetTransform(&Body.transform);
-		Leg1Body->GetTransform(&Leg1.transform);
-		Leg2Body->GetTransform(&Leg2.transform);
-	}
+	HeadBody->GetTransform(&Head.transform);
+	BodyBody->GetTransform(&Body.transform);
+	Leg1Body->GetTransform(&Leg1.transform);
+	Leg2Body->GetTransform(&Leg2.transform);
 	Head.Render();
 	Body.Render();
 	Leg1.Render();
@@ -132,9 +121,6 @@ const PhysBody3D* Chicken::GetSensorBody() const
 
 void Chicken::RestartChicken()
 {
-
-	//need to restart angular and linear velocity of bodies
-	//need to destroy bodies of chickens created
 
 	int x = 0;
 	int y = 0;
@@ -165,5 +151,12 @@ void Chicken::RestartChicken()
 	// -----------------------------------------------------------
 
 	chicken_sensor.SetPos(x, y, z);
+
+	// -----------------------------------------------------------
+
+	BodyBody->Freeze(true);
+	HeadBody->Freeze(true);
+	Leg1Body->Freeze(true);
+	Leg2Body->Freeze(true);
 
 }

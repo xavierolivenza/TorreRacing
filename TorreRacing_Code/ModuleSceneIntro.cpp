@@ -446,11 +446,6 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-	{
-		cylinder1body->SetNewMass(20);
-	}
-	
 	/*
 	float a = 0;
 	float b = 0;
@@ -723,7 +718,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		{
 			if (chickens_dynamic_array[i]->firsttime == true)
 			{
-				//chickens_dynamic_array[i]->CreatePhysicChicken();
+				chickens_dynamic_array[i]->ActivateChicken();
 				chickens_dynamic_array[i]->firsttime = false;
 			}
 		}

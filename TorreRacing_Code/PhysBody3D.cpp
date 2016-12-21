@@ -85,7 +85,14 @@ void PhysBody3D::SetLinearVelocity(float x, float y, float z)
 	this->body->setLinearVelocity(btVector3(x, y, z));
 }
 
-void PhysBody3D::SetNewMass(float mass)
+void PhysBody3D::Freeze(bool freezed)
 {
-	body->setMassProps(mass, btVector3(0,0,0));
+	if (freezed == true)
+	{
+		this->body->forceActivationState(DISABLE_SIMULATION);
+	}
+	else
+	{
+		this->body->forceActivationState(ACTIVE_TAG);
+	}
 }

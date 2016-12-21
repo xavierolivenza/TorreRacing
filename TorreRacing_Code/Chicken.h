@@ -29,14 +29,11 @@ private:
 	Cylinder Leg2;
 	PhysBody3D* Leg2Body;
 
-	bool GraphicChickeniscreated = false;
-	bool isphysic = false;
-
 	vec3 OriginalPosition;
 
 public:
 
-	void CreatePhysicChicken();
+	void ActivateChicken();
 	void RenderChicken();
 	const PhysBody3D* GetSensorBody() const;
 
@@ -46,6 +43,6 @@ public:
 
 private:
 
-	void CreateGraphicChicken(const float x, const float y, const float z, ModuleSceneIntro* This);
+	void CreateChicken(const float x, const float y, const float z, ModuleSceneIntro* This);
 
 };
