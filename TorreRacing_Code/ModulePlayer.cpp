@@ -459,7 +459,7 @@ update_status ModulePlayer::Update(float dt)
 	}
 	else
 	{
-		sprintf_s(title, "TorreRacing, You won with a time of %i:%2.i:%4.i", minutes_i, seconds_i, miliseconds_i);
+		sprintf_s(title, "TorreRacing, You won with a time of %i:%2.i:%4.i. Press R to restart", minutes_i, seconds_i, miliseconds_i);
 	}
 	App->window->SetTitle(title);
 
