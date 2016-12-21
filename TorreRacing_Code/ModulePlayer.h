@@ -41,9 +41,11 @@ public:
 	float acceleration;
 	float brake;
 
-	uint COW_fx;
-
+	uint Cow_fx;
+	uint Chicken_fx;
+	
 	Timer game_timer;
+	uint chickens_taken = 0;
 
 	bool freecam = false;
 	bool win = false;

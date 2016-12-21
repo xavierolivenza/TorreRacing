@@ -20,7 +20,8 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
-	COW_fx = App->audio->LoadFx("sounds/COW.wav");
+	Cow_fx = App->audio->LoadFx("sounds/Cow_fx.wav");
+	Chicken_fx = App->audio->LoadFx("sounds/Chicken_fx.wav");
 
 	VehicleInfo car;
 
@@ -417,8 +418,7 @@ update_status ModulePlayer::Update(float dt)
 			{
 				vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
 				jump_coolddown.Start();
-				
-				App->audio->PlayFx(COW_fx);
+				App->audio->PlayFx(Cow_fx);
 			}
 		}
 	}
@@ -435,7 +435,7 @@ update_status ModulePlayer::Update(float dt)
 		jump_cooldown_calc = 0;
 
 	int tiemr_milisec_read = 0;
-	tiemr_milisec_read = game_timer.Read();
+	tiemr_milisec_read = game_timer.Read() - chickens_taken * 1000;
 
 	float minutes_f = 0.0f;
 	int minutes_i = 0;
@@ -477,5 +477,6 @@ void ModulePlayer::RestartGame()
 	App->scene_intro->first_time_start_sensor = true;
 	App->scene_intro->first_time_barn_sensor = true;
 	App->scene_intro->RestartChickens();
+	chickens_taken = 0;
 	win = false;
 }

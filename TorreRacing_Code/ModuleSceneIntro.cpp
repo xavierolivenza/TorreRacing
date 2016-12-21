@@ -682,7 +682,7 @@ update_status ModuleSceneIntro::Update(float dt)
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-	if (((body1 == start_sensorbody) || (body2 == start_sensorbody)) && (first_time_start_sensor == true))
+    if (((body1 == start_sensorbody) || (body2 == start_sensorbody)) && (first_time_start_sensor == true))
 	{
 		App->player->game_timer.Start();
 		first_time_start_sensor = false;
@@ -705,6 +705,8 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 			if (chickens_dynamic_array[i]->firsttime == true)
 			{
 				chickens_dynamic_array[i]->ActivateChicken();
+				App->audio->PlayFx(App->player->Chicken_fx);
+				App->player->chickens_taken++;
 				chickens_dynamic_array[i]->firsttime = false;
 			}
 		}
