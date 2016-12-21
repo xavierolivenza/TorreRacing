@@ -5,6 +5,7 @@
 #include "PhysBody3D.h"
 
 #define WIDTH 15
+#define CHICKEN_Y_FLOOR 1.5f
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -421,8 +422,9 @@ bool ModuleSceneIntro::Start()
 	//--------------------------------------------//
 	//------------------Chickens------------------//
 	//--------------------------------------------//
-	chickens_dynamic_array.PushBack(new Chicken(0, 6, 10, this));
-	chickens_dynamic_array.PushBack(new Chicken(0, 6, 20, this));
+	chickens_dynamic_array.PushBack(new Chicken( 0, CHICKEN_Y_FLOOR, 10, this));
+	chickens_dynamic_array.PushBack(new Chicken( 2, CHICKEN_Y_FLOOR, 20, this));
+	chickens_dynamic_array.PushBack(new Chicken(-2, CHICKEN_Y_FLOOR, 30, this));
 	//--------------------------------------------//
 
 	return ret;

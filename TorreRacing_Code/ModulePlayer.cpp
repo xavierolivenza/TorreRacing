@@ -82,7 +82,7 @@ bool ModulePlayer::Start()
 	car.chassis_offset[11].Set(0.6, 3.4, 1.7);	//HORN1
 	car.chassis_offset[12].Set(0.75, 3.5, 1.7);	//HORN11
 	car.chassis_offset[13].Set(-0.6, 3.4, 1.7);	//HORN2
-	car.chassis_offset[14].Set(-0.75, 3.5, 1.7);	//HORN22
+	car.chassis_offset[14].Set(-0.75, 3.5, 1.7);//HORN22
 
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.88f;
