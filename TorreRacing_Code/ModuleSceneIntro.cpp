@@ -709,37 +709,40 @@ update_status ModuleSceneIntro::Update(float dt)
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-    if (((body1 == start_sensorbody) || (body2 == start_sensorbody)) && (first_time_start_sensor == true))
+	if ((body1 == App->player->vehicle) || (body2 == App->player->vehicle))
 	{
-		App->player->game_timer.Start();
-		first_time_start_sensor = false;
-	}
-	if (((body1 == barn_sensorbody) || (body2 == barn_sensorbody)) && (first_time_barn_sensor == true))
-	{
-		App->player->game_timer.Stop();
-		App->player->win = true;
-		first_time_barn_sensor = false;
-	}
-	//Barn death sensor
-	if ((body1 == DeathSensorbody) || (body2 == DeathSensorbody))
-	{
-		App->player->RestartGame();
-	}
-
-	//Chickens sensors
-	const PhysBody3D* chicken_sensor;
-	uint chickens_dynamic_array_count = chickens_dynamic_array.Count();
-	for (int i = 0; i < chickens_dynamic_array_count; i++)
-	{
-		chicken_sensor = chickens_dynamic_array[i]->GetSensorBody();
-		if ((body1 == chicken_sensor) || (body2 == chicken_sensor))
+		if (((body1 == start_sensorbody) || (body2 == start_sensorbody)) && (first_time_start_sensor == true))
 		{
-			if (chickens_dynamic_array[i]->firsttime == true)
+			App->player->game_timer.Start();
+			first_time_start_sensor = false;
+		}
+		if (((body1 == barn_sensorbody) || (body2 == barn_sensorbody)) && (first_time_barn_sensor == true))
+		{
+			App->player->game_timer.Stop();
+			App->player->win = true;
+			first_time_barn_sensor = false;
+		}
+		//Barn death sensor
+		if ((body1 == DeathSensorbody) || (body2 == DeathSensorbody))
+		{
+			App->player->RestartGame();
+		}
+
+		//Chickens sensors
+		const PhysBody3D* chicken_sensor;
+		uint chickens_dynamic_array_count = chickens_dynamic_array.Count();
+		for (int i = 0; i < chickens_dynamic_array_count; i++)
+		{
+			chicken_sensor = chickens_dynamic_array[i]->GetSensorBody();
+			if ((body1 == chicken_sensor) || (body2 == chicken_sensor))
 			{
-				chickens_dynamic_array[i]->ActivateChicken();
-				App->audio->PlayFx(App->player->Chicken_fx);
-				App->player->chickens_taken++;
-				chickens_dynamic_array[i]->firsttime = false;
+				if (chickens_dynamic_array[i]->firsttime == true)
+				{
+					chickens_dynamic_array[i]->ActivateChicken();
+					App->audio->PlayFx(App->player->Chicken_fx);
+					App->player->chickens_taken++;
+					chickens_dynamic_array[i]->firsttime = false;
+				}
 			}
 		}
 	}
