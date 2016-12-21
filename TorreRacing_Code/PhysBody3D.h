@@ -12,8 +12,11 @@ class btTransform;
 // =================================================
 struct PhysBody3D
 {
+
 	friend class ModulePhysics3D;
+
 public:
+
 	PhysBody3D(btRigidBody* body);
 	~PhysBody3D();
 
@@ -29,12 +32,15 @@ public:
 	void Freeze(bool freezed);
 
 private:
+
 	btRigidBody* body = nullptr;
 	vec3 vehicle_position;
 	bool is_sensor = false;
 
 public:
+
 	p2List<Module*> collision_listeners;
+
 };
 
 #endif // __PhysBody3D_H__

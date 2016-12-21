@@ -22,12 +22,16 @@ private:
 
 	Cube Head;
 	PhysBody3D* HeadBody;
+	mat4x4 Original_Head_Transform;
 	Cube Body;
 	PhysBody3D* BodyBody;
+	mat4x4 Original_Body_Transform;
 	Cylinder Leg1;
 	PhysBody3D* Leg1Body;
+	mat4x4 Original_Leg1_Transform;
 	Cylinder Leg2;
 	PhysBody3D* Leg2Body;
+	mat4x4 Original_Leg2_Transform;
 
 	vec3 OriginalPosition;
 

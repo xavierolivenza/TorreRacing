@@ -15,10 +15,9 @@ Chicken::Chicken(const float x, const float y, const float z, ModuleSceneIntro* 
 
 Chicken::~Chicken()
 {
-
 }
 
-void Chicken::CreateChicken(const float x, const float y, const float z, ModuleSceneIntro* This)
+void Chicken::CreateChicken(const float x, const float y, const float z, ModuleSceneIntro* This/*needed to set hte chicken collider*/)
 {
 
 	OriginalPosition.Set(x, y, z);
@@ -87,6 +86,13 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 	chicken_sensor_body->collision_listeners.add(This);
 	chicken_sensor_body->SetPos(x, y, z);
 
+	// -----------------------------------------------------------
+
+	HeadBody->GetTransform(&Original_Head_Transform);
+	BodyBody->GetTransform(&Original_Body_Transform);
+	Leg1Body->GetTransform(&Original_Leg1_Transform);
+	Leg2Body->GetTransform(&Original_Leg2_Transform);
+	
 }
 
 void Chicken::ActivateChicken()
@@ -130,30 +136,26 @@ void Chicken::RestartChicken()
 	y = OriginalPosition.y;
 	z = OriginalPosition.z;
 
-	Body.SetPos(x, y, z);
-	Body.SetRotation(0, { 0,1,0 });
+	BodyBody->SetPos(x, y, z);
+	BodyBody->SetTransform(&Original_Body_Transform);
 
 	// -----------------------------------------------------------
 
-	Head.SetPos(x + 0.75, y + 0.75, z);
-	Head.SetRotation(0, { 0,1,0 });
+	HeadBody->SetPos(x + 0.75, y + 0.75, z);
+	BodyBody->SetTransform(&Original_Head_Transform);
 
 	// -----------------------------------------------------------
 
-	Leg1.SetPos(x, y - 0.75, z - 0.3f);
-	Leg1.SetRotation(90, { 0,0,1 });
+	Leg1Body->SetPos(x, y - 0.75, z - 0.3f);
+	BodyBody->SetTransform(&Original_Leg1_Transform);
 
 	// -----------------------------------------------------------
 
-	Leg2.SetPos(x, y - 0.75, z + 0.3f);
-	Leg2.SetRotation(90, { 0,0,1 });
+	Leg2Body->SetPos(x, y - 0.75, z + 0.3f);
+	BodyBody->SetTransform(&Original_Leg2_Transform);
 
 	// -----------------------------------------------------------
-
-	chicken_sensor.SetPos(x, y, z);
-
-	// -----------------------------------------------------------
-
+	
 	BodyBody->Freeze(true);
 	HeadBody->Freeze(true);
 	Leg1Body->Freeze(true);

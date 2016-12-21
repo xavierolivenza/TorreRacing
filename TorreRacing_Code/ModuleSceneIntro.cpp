@@ -510,12 +510,6 @@ update_status ModuleSceneIntro::Update(float dt)
 	*/
 
 	//--------------------------------------------//
-	/*
-	Plane p(0, 1, 0, 0);
-	p.axis = true;
-	p.Render();
-	*/
-	//--------------------------------------------//
 	//Start
 	cube1body->GetTransform(&cube1.transform);
 	cube1.Render();
@@ -703,6 +697,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	if (((body1 == barn_sensorbody) || (body2 == barn_sensorbody)) && (first_time_barn_sensor == true))
 	{
 		App->player->game_timer.Stop();
+		App->player->win = true;
 		first_time_barn_sensor = false;
 	}
 	if ((body1 == death_sensor1body) || (body2 == death_sensor1body))

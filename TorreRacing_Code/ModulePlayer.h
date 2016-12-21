@@ -33,6 +33,7 @@ public:
 	Timer game_timer;
 
 	bool freecam = false;
+	bool win = false;
 
 private:
 

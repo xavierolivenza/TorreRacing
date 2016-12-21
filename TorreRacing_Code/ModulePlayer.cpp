@@ -251,7 +251,45 @@ update_status ModulePlayer::Update(float dt)
 	vehicle_origin_axis = vehicle_transform->getOrigin();
 	*/
 
+	//Teleportation
+	//Start
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		vehicle->SetPos(0, 12, 0);
+	}
+	//Rised curve
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		vehicle->SetPos(-452.5, 12, -5);
+	}
+	//Before Consecutive jumps
+	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+	{
+		vehicle->SetPos(-300.64, 12, -118.46);
+	}
+	//After Consecutive jumps
+	if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+	{
+		vehicle->SetPos(-300.64, 12, -840);
+	}
+	//Wood
+	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+	{
+		vehicle->SetPos(-365.64, 12, -905);
+	}
+	//Final line
+	if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+	{
+		vehicle->SetPos(-488.14, 12, -590);
+	}
+	//End
+	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+	{
+		vehicle->SetPos(-488.14, 0, -310);
+	}
+
 	turn = acceleration = brake = 0.0f;
+
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		freecam = !freecam;
@@ -420,7 +458,14 @@ update_status ModulePlayer::Update(float dt)
 	miliseconds_i = decimal_seconds * 1000;
 
 	char title[80];
-	sprintf_s(title, "TorreRacing, Time: %i:%2.i:%4.i Vehicle velocity: %4.1f Km/h, JumpCooldown: %.2f", minutes_i, seconds_i, miliseconds_i, vehicle->GetKmh(), jump_cooldown_calc);
+	if (win == false)
+	{
+		sprintf_s(title, "TorreRacing, Time: %i:%2.i:%4.i Vehicle velocity: %4.1f Km/h, JumpCooldown: %.2f", minutes_i, seconds_i, miliseconds_i, vehicle->GetKmh(), jump_cooldown_calc);
+	}
+	else
+	{
+		sprintf_s(title, "TorreRacing, You won with a time of %i:%2.i:%4.i", minutes_i, seconds_i, miliseconds_i);
+	}
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
@@ -443,4 +488,6 @@ void ModulePlayer::RestartGame()
 		App->scene_intro->chickens_dynamic_array[i]->firsttime = true;
 		App->scene_intro->chickens_dynamic_array[i]->RestartChicken();
 	}
+
+	App->player->win = false;
 }

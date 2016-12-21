@@ -212,6 +212,6 @@ public:
 
 	bool first_time_start_sensor = true;
 	bool first_time_barn_sensor = true;
-	bool sensors_debug = true;
+	bool sensors_debug = false;
 
 };
