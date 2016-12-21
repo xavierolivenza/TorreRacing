@@ -424,9 +424,19 @@ bool ModuleSceneIntro::Start()
 	//--------------------------------------------//
 	//------------------Chickens------------------//
 	//--------------------------------------------//
-	chickens_dynamic_array.PushBack(new Chicken( 0, CHICKEN_Y_FLOOR, 10, this));
-	chickens_dynamic_array.PushBack(new Chicken( 2, CHICKEN_Y_FLOOR, 20, this));
-	chickens_dynamic_array.PushBack(new Chicken(-2, CHICKEN_Y_FLOOR, 30, this));
+	chickens_dynamic_array.PushBack(new Chicken( -7.5, CHICKEN_Y_FLOOR, 115, this));
+	chickens_dynamic_array.PushBack(new Chicken( -365, CHICKEN_Y_FLOOR, 85, this));
+	chickens_dynamic_array.PushBack(new Chicken( -395, CHICKEN_Y_FLOOR, 70, this));
+	chickens_dynamic_array.PushBack(new Chicken( -445, CHICKEN_Y_FLOOR, 35, this));
+	chickens_dynamic_array.PushBack(new Chicken( -430, 103.57, -333.85, this));
+	chickens_dynamic_array.PushBack(new Chicken( -410, 108.57, -338.85, this));
+	chickens_dynamic_array.PushBack(new Chicken( -385, CHICKEN_Y_FLOOR, -54.8, this));
+	chickens_dynamic_array.PushBack(new Chicken( -300.64, CHICKEN_Y_FLOOR, -126.46, this));
+	chickens_dynamic_array.PushBack(new Chicken( -310.64, CHICKEN_Y_FLOOR, -840, this));
+	chickens_dynamic_array.PushBack(new Chicken( -405.64, CHICKEN_Y_FLOOR, -910.5, this));
+	chickens_dynamic_array.PushBack(new Chicken( -465.64, CHICKEN_Y_FLOOR, -840.5, this));
+	chickens_dynamic_array.PushBack(new Chicken( -488.14, CHICKEN_Y_FLOOR, -650, this));
+	chickens_dynamic_array.PushBack(new Chicken( -488.14, CHICKEN_Y_FLOOR, -400.5, this));
 	//--------------------------------------------//
 
 	return ret;
