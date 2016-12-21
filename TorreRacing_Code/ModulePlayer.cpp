@@ -481,13 +481,6 @@ void ModulePlayer::RestartGame()
 	game_timer.Stop();
 	App->scene_intro->first_time_start_sensor = true;
 	App->scene_intro->first_time_barn_sensor = true;
-
-	uint chickens_dynamic_array_count = App->scene_intro->chickens_dynamic_array.Count();
-	for (int i = 0; i < chickens_dynamic_array_count; i++)
-	{
-		App->scene_intro->chickens_dynamic_array[i]->firsttime = true;
-		App->scene_intro->chickens_dynamic_array[i]->RestartChicken();
-	}
-
-	App->player->win = false;
+	App->scene_intro->RestartChickens();
+	win = false;
 }

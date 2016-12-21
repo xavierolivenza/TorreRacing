@@ -52,8 +52,16 @@ void PhysBody3D::SetPos(float x, float y, float z)
 	vehicle_position.z = z;
 }
 
-const vec3 PhysBody3D::GetPos() const {
-	return vehicle_position;
+const vec3 PhysBody3D::GetPos() const
+{
+	vec3 VehiclePos;
+
+	mat4x4 vehicle_trans;
+	GetTransform(&vehicle_trans);
+
+	VehiclePos = vehicle_trans.translation();
+
+	return VehiclePos;
 }
 
 // ---------------------------------------------------------

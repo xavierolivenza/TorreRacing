@@ -21,6 +21,8 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
+	void RestartChickens();//Function needded to keep chickens_dynamic_array private
+
 private:
 	//--------------------------------------------//
 	//-----------------Car parts------------------//
@@ -168,10 +170,6 @@ private:
 	Cube		 cube24;
 	PhysBody3D*  cube24body;
 	//--------------------------------------------//
-	//Death sensor
-	Cube		 death_sensor1;
-	PhysBody3D*  death_sensor1body;
-	//--------------------------------------------//
 
 	//--------------------------------------------//
 	//-----------------Barn parts-----------------//
@@ -200,8 +198,6 @@ private:
 	PhysBody3D*  barn_wall_8_body;
 	//--------------------------------------------//
 	
-public:
-
 	//--------------------------------------------//
 	//------------------Chickens------------------//
 	//--------------------------------------------//

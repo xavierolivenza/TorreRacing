@@ -3,6 +3,7 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
+#include "PhysVehicle3D.h"
 
 #define WIDTH 15
 #define CHICKEN_Y_FLOOR 1.5f
@@ -337,15 +338,6 @@ bool ModuleSceneIntro::Start()
 	cube24body = App->physics->AddBody(cube24, 0);
 	cube24body->SetPos(-488.14, 0, -590);
 	//--------------------------------------------//
-	//Death sensor
-	death_sensor1.size.x = 1500;
-	death_sensor1.size.y = 1;
-	death_sensor1.size.z = 1500;
-	death_sensor1.color = Green;
-	death_sensor1body = App->physics->AddBody(death_sensor1, 0);
-	death_sensor1body->SetAsSensor(true);
-	death_sensor1body->collision_listeners.add(this);
-	death_sensor1body->SetPos(-450, -100, -350);
 
 	//--------------------------------------------//
 	//-----------------Barn parts-----------------//
@@ -636,12 +628,6 @@ update_status ModuleSceneIntro::Update(float dt)
 	cube24body->GetTransform(&cube24.transform);
 	cube24.Render();
 	//--------------------------------------------//
-	//Death sensor
-	if (sensors_debug == true)
-	{
-		death_sensor1body->GetTransform(&death_sensor1.transform);
-		death_sensor1.Render();
-	}
 
 	//--------------------------------------------//
 	//-----------------Barn parts-----------------//
@@ -679,6 +665,13 @@ update_status ModuleSceneIntro::Update(float dt)
 		chickens_dynamic_array[i]->RenderChicken();
 	}
 
+	vec3 VehiclePos = App->player->vehicle->GetPos();
+
+	if (VehiclePos.y <= - 100)
+	{
+		App->player->RestartGame();
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		sensors_debug = !sensors_debug;
@@ -700,10 +693,6 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		App->player->win = true;
 		first_time_barn_sensor = false;
 	}
-	if ((body1 == death_sensor1body) || (body2 == death_sensor1body))
-	{
-		App->player->RestartGame();
-	}
 
 	//Chickens sensors
 	const PhysBody3D* chicken_sensor;
@@ -719,5 +708,15 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 				chickens_dynamic_array[i]->firsttime = false;
 			}
 		}
+	}
+}
+
+void ModuleSceneIntro::RestartChickens()
+{
+	uint chickens_dynamic_array_count = App->scene_intro->chickens_dynamic_array.Count();
+	for (int i = 0; i < chickens_dynamic_array_count; i++)
+	{
+		App->scene_intro->chickens_dynamic_array[i]->firsttime = true;
+		App->scene_intro->chickens_dynamic_array[i]->RestartChicken();
 	}
 }

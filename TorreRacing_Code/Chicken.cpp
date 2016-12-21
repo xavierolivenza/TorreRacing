@@ -74,7 +74,6 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 
 	App->physics->AddConstraintP2P(*BodyBody, *Leg2Body, { +0.35f,-0.5f,-0.35f }, { 0.7f,0,0 });
 
-
 	// -----------------------------------------------------------
 
 	chicken_sensor.radius = 1;
