@@ -266,7 +266,7 @@ bool ModuleSceneIntro::Start()
 	cylinderWood.color = Chocolate;
 	cylinderWoodbody = App->physics->AddBody(cylinderWood, 0);
 	cylinderWoodbody->SetPos(-390.64, 15, -912.5);
-	cylinderWoodHit.radius = 1.5;
+	cylinderWoodHit.radius = 1.25;
 	cylinderWoodHit.height = 10;
 	cylinderWoodHit.SetRotation(90.0f, vec3(0, 1, 0));
 	cylinderWoodHit.color = Brown;

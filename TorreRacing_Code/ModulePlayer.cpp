@@ -6,11 +6,6 @@
 #include "PhysBody3D.h"
 #include "ModuleAudio.h"
 
-#define FRONT_IMPULSE 10000.0f
-#define LATERAL_IMPULSE 5000.0f
-
-#define JUMP_COOLDOWN 3.0f
-
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
@@ -84,7 +79,7 @@ bool ModulePlayer::Start()
 	car.chassis_offset[13].Set(-0.6, 3.4, 1.7);	//HORN2
 	car.chassis_offset[14].Set(-0.75, 3.5, 1.7);//HORN22
 
-	car.mass = 500.0f;
+	car.mass = 1500.0f;
 	car.suspensionStiffness = 15.88f;
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 0.88f;
@@ -420,7 +415,7 @@ update_status ModulePlayer::Update(float dt)
 			
 			if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
 			{
-				vehicle->Push(0.0f, 5000.0f, 0.0f);
+				vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
 				jump_coolddown.Start();
 				
 				App->audio->PlayFx(COW_fx);
