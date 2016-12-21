@@ -50,6 +50,47 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 
 	// -----------------------------------------------------------
 
+	Peak.radius = 0.1;
+	Peak.height = 0.75;
+	Peak.color = Yellow;
+	Peak.SetPos(x + 1.3, y + 0.55, z);
+	Peak.SetRotation(90, { 1,0,0 });
+
+	PeakBody = App->physics->AddBody(Peak, 1);
+	PeakBody->Freeze(true);
+
+	App->physics->AddConstraintP2P(*HeadBody, *PeakBody, { 0.25f,0,0.25f }, { -0.25f,-0.3f,0 });
+
+	// -----------------------------------------------------------
+
+	Eye1.size.x = 0.15;
+	Eye1.size.y = 0.15;
+	Eye1.size.z = 0.15;
+	Eye1.color = Black;
+	Eye1.SetPos(x + 1, y + 0.80, z - 0.25);
+	Eye1.SetRotation(0, { 0,1,0 });
+
+	Eye1Body = App->physics->AddBody((Eye1), 0.1);
+	Eye1Body->Freeze(true);
+
+	App->physics->AddConstraintP2P(*HeadBody, *Eye1Body, { 0.05f,0,0.05f }, { -0.05f,-0.10f,0 });
+
+	// -----------------------------------------------------------
+
+	Eye2.size.x = 0.15;
+	Eye2.size.y = 0.15;
+	Eye2.size.z = 0.15;
+	Eye2.color = Black;
+	Eye2.SetPos(x + 1, y + 0.80, z + 0.25);
+	Eye2.SetRotation(0, { 0,1,0 });
+
+	Eye2Body = App->physics->AddBody((Eye2), 0.1);
+	Eye2Body->Freeze(true);
+
+	App->physics->AddConstraintP2P(*HeadBody, *Eye2Body, { 0.05f,0,0.05f }, { -0.05f,-0.10f,0 });
+
+	// -----------------------------------------------------------
+
 	Leg1.radius = 0.1;
 	Leg1.height = 0.75;
 	Leg1.color = Yellow;
@@ -91,7 +132,9 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 	BodyBody->GetTransform(&Original_Body_Transform);
 	Leg1Body->GetTransform(&Original_Leg1_Transform);
 	Leg2Body->GetTransform(&Original_Leg2_Transform);
-	
+	PeakBody->GetTransform(&Original_Peak_Transform);
+	Eye1Body->GetTransform(&Original_Eye1_Transform);
+	Eye2Body->GetTransform(&Original_Eye2_Transform);
 }
 
 void Chicken::ActivateChicken()
@@ -100,6 +143,9 @@ void Chicken::ActivateChicken()
 	HeadBody->Freeze(false);
 	Leg1Body->Freeze(false);
 	Leg2Body->Freeze(false);
+	PeakBody->Freeze(false);
+	Eye1Body->Freeze(false);
+	Eye2Body->Freeze(false);
 }
 
 void Chicken::RenderChicken()
@@ -113,10 +159,17 @@ void Chicken::RenderChicken()
 	BodyBody->GetTransform(&Body.transform);
 	Leg1Body->GetTransform(&Leg1.transform);
 	Leg2Body->GetTransform(&Leg2.transform);
+	PeakBody->GetTransform(&Peak.transform);
+	Eye1Body->GetTransform(&Eye1.transform);
+	Eye2Body->GetTransform(&Eye2.transform);
+
 	Head.Render();
 	Body.Render();
 	Leg1.Render();
 	Leg2.Render();
+	Peak.Render();
+	Eye1.Render();
+	Eye2.Render();
 }
 
 const PhysBody3D* Chicken::GetSensorBody() const
@@ -155,9 +208,26 @@ void Chicken::RestartChicken()
 
 	// -----------------------------------------------------------
 	
+	PeakBody->SetPos(x + 1.3, y + 0.55, z);
+	PeakBody->SetTransform(&Original_Peak_Transform);
+
+	// -----------------------------------------------------------
+	
+	Eye1Body->SetPos(x + 1, y + 0.80, z - 0.25);
+	Eye1Body->SetTransform(&Original_Eye1_Transform);
+
+	// -----------------------------------------------------------
+
+	Eye2Body->SetPos(x + 1, y + 0.80, z + 0.25);
+	Eye2Body->SetTransform(&Original_Eye2_Transform);
+
+	// -----------------------------------------------------------
 	BodyBody->Freeze(true);
 	HeadBody->Freeze(true);
 	Leg1Body->Freeze(true);
 	Leg2Body->Freeze(true);
+	PeakBody->Freeze(true);
+	Eye1Body->Freeze(true);
+	Eye2Body->Freeze(true);
 
 }

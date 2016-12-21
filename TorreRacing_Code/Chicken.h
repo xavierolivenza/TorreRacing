@@ -32,6 +32,15 @@ private:
 	Cylinder Leg2;
 	PhysBody3D* Leg2Body;
 	mat4x4 Original_Leg2_Transform;
+	Cylinder Peak;
+	PhysBody3D* PeakBody;
+	mat4x4 Original_Peak_Transform;
+	Cube Eye1;
+	PhysBody3D* Eye1Body;
+	mat4x4 Original_Eye1_Transform;
+	Cube Eye2;
+	PhysBody3D* Eye2Body;
+	mat4x4 Original_Eye2_Transform;
 
 	vec3 OriginalPosition;
 
