@@ -141,17 +141,17 @@ void Chicken::RestartChicken()
 	// -----------------------------------------------------------
 
 	HeadBody->SetPos(x + 0.75, y + 0.75, z);
-	BodyBody->SetTransform(&Original_Head_Transform);
+	HeadBody->SetTransform(&Original_Head_Transform);
 
 	// -----------------------------------------------------------
 
 	Leg1Body->SetPos(x, y - 0.75, z - 0.3f);
-	BodyBody->SetTransform(&Original_Leg1_Transform);
+	Leg1Body->SetTransform(&Original_Leg1_Transform);
 
 	// -----------------------------------------------------------
 
 	Leg2Body->SetPos(x, y - 0.75, z + 0.3f);
-	BodyBody->SetTransform(&Original_Leg2_Transform);
+	Leg2Body->SetTransform(&Original_Leg2_Transform);
 
 	// -----------------------------------------------------------
 	
