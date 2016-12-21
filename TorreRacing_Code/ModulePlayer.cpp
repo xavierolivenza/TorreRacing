@@ -81,10 +81,10 @@ bool ModulePlayer::Start()
 	car.chassis_offset[14].Set(-0.75, 3.5, 1.7);//HORN22
 
 	car.mass = 1500.0f;
-	car.suspensionStiffness = 15.88f;
+	car.suspensionStiffness = 3.0f;
 	car.suspensionCompression = 0.83f;
-	car.suspensionDamping = 0.88f;
-	car.maxSuspensionTravelCm = 1000.0f;
+	car.suspensionDamping = 0.90f;
+	car.maxSuspensionTravelCm = 100.0f;
 	car.frictionSlip = 50.5;
 	car.maxSuspensionForce = 6000.0f;
 
