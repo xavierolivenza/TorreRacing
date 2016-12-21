@@ -41,6 +41,9 @@ private:
 	Cube Eye2;
 	PhysBody3D* Eye2Body;
 	mat4x4 Original_Eye2_Transform;
+	Cube Crest;
+	PhysBody3D* CrestBody;
+	mat4x4 Original_Crest_Transform;
 
 	vec3 OriginalPosition;
 

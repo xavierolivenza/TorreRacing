@@ -84,7 +84,7 @@ bool ModulePlayer::Start()
 	car.suspensionStiffness = 3.0f;
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 0.90f;
-	car.maxSuspensionTravelCm = 100.0f;
+	car.maxSuspensionTravelCm = 1000.0f;
 	car.frictionSlip = 50.5;
 	car.maxSuspensionForce = 6000.0f;
 
