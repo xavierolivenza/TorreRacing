@@ -295,6 +295,11 @@ update_status ModulePlayer::Update(float dt)
 	float Vehicle_Velocity = 0;
 	Vehicle_Velocity = App->player->vehicle->GetKmh();
 
+	if (isnan(Vehicle_Velocity) >= 1)
+	{
+		Vehicle_Velocity = 0;
+	}
+
 	if (freecam == false)
 	{
 		if ((App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) && (Vehicle_Velocity <= NORMAL_SPEED_LIMIT))
@@ -438,8 +443,13 @@ update_status ModulePlayer::Update(float dt)
 	if (jump_cooldown_calc < 0)
 		jump_cooldown_calc = 0;
 
-	int tiemr_milisec_read = 0;
-	tiemr_milisec_read = game_timer.Read() - chickens_taken * 1000;
+	int tiemer_milisec_read = 0;
+	tiemer_milisec_read = game_timer.Read() - chickens_taken * 2000;
+
+	if (tiemer_milisec_read <= 0)
+	{
+		tiemer_milisec_read = 0;
+	}
 
 	float minutes_f = 0.0f;
 	int minutes_i = 0;
@@ -448,7 +458,7 @@ update_status ModulePlayer::Update(float dt)
 	int seconds_i = 0;
 	float decimal_seconds = 0.0f;
 	int miliseconds_i = 0;
-	minutes_f = tiemr_milisec_read * 0.001f * 0.0167f;
+	minutes_f = tiemer_milisec_read * 0.001f * 0.0167f;
 	minutes_i = minutes_f;
 	decimal_minutes = minutes_f - minutes_i;
 	seconds_f = decimal_minutes * 60;
@@ -473,9 +483,9 @@ update_status ModulePlayer::Update(float dt)
 			chickens_taken,
 			lowesttime_min, lowesttime_seconds, lowesttime_miliseconds);
 
-		if ((tiemr_milisec_read < lowesttime_all_in_miliseconds) || (first_best_time == true))
+		if ((tiemer_milisec_read < lowesttime_all_in_miliseconds) || (first_best_time == true))
 		{
-			lowesttime_all_in_miliseconds = tiemr_milisec_read;
+			lowesttime_all_in_miliseconds = tiemer_milisec_read;
 			lowesttime_miliseconds = miliseconds_i;
 			lowesttime_seconds = seconds_i;
 			lowesttime_min = minutes_i;
