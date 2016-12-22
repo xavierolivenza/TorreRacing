@@ -333,10 +333,34 @@ bool ModuleSceneIntro::Start()
 	cylinder14body = App->physics->AddBody(cylinder14, 0);
 	cube24.size.x = WIDTH;
 	cube24.size.y = 1;
-	cube24.size.z = 500;
+	cube24.size.z = 100;
 	cube24.color = Chocolate;
-	cube24.SetPos(-488.14, 0, -590);
+	cube24.SetPos(-488.14, 0, -790);
 	cube24body = App->physics->AddBody(cube24, 0);
+	cube25.size.x = WIDTH;
+	cube25.size.y = 1;
+	cube25.size.z = 100;
+	cube25.color = Chocolate;
+	cube25.SetPos(-488.14, 0, -690);
+	cube25body = App->physics->AddBody(cube25, 0);
+	cube26.size.x = WIDTH;
+	cube26.size.y = 1;
+	cube26.size.z = 100;
+	cube26.color = Chocolate;
+	cube26.SetPos(-488.14, 0, -590);
+	cube26body = App->physics->AddBody(cube26, 0);
+	cube27.size.x = WIDTH;
+	cube27.size.y = 1;
+	cube27.size.z = 100;
+	cube27.color = Chocolate;
+	cube27.SetPos(-488.14, 0, -490);
+	cube27body = App->physics->AddBody(cube27, 0);
+	cube28.size.x = WIDTH;
+	cube28.size.y = 1;
+	cube28.size.z = 100;
+	cube28.color = Chocolate;
+	cube28.SetPos(-488.14, 0, -390);
+	cube28body = App->physics->AddBody(cube28, 0);
 	//--------------------------------------------//
 	//Death
 	DeathSensor.size.x = 100;
@@ -537,6 +561,10 @@ update_status ModuleSceneIntro::Update(float dt)
 	//Final line
 	cylinder14.Render();
 	cube24.Render();
+	cube25.Render();
+	cube26.Render();
+	cube27.Render();
+	cube28.Render();
 	//--------------------------------------------//
 	//Death
 	if (sensors_debug == true)

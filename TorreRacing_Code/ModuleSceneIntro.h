@@ -167,8 +167,18 @@ private:
 	//Final line
 	Cylinder     cylinder14;
 	PhysBody3D*  cylinder14body;
+	//Final line need to be with parts and not a long one because bullet didn't collide very well between the
+	//vehicle and one large cube, the wheels go inside the cube and vehicle starts doing strange things
 	Cube		 cube24;
 	PhysBody3D*  cube24body;
+	Cube		 cube25;
+	PhysBody3D*  cube25body;
+	Cube		 cube26;
+	PhysBody3D*  cube26body;
+	Cube		 cube27;
+	PhysBody3D*  cube27body;
+	Cube		 cube28;
+	PhysBody3D*  cube28body;
 	//--------------------------------------------//
 	Cube		 DeathSensor;
 	PhysBody3D*  DeathSensorbody;
