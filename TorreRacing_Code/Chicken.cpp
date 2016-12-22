@@ -46,7 +46,7 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 	HeadBody = App->physics->AddBody((Head), 10);
 	HeadBody->Freeze(true);
 	
-	App->physics->AddConstraintP2P(*BodyBody, *HeadBody, { 1.0f,0,0.25f }, { -0.45f,-0.5f,0 });
+	//App->physics->AddConstraintP2P(*BodyBody, *HeadBody, { 1.0f,0,0.25f }, { -0.45f,-0.5f,0 });
 
 	// -----------------------------------------------------------
 
@@ -59,7 +59,7 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 	PeakBody = App->physics->AddBody(Peak, 1);
 	PeakBody->Freeze(true);
 
-	App->physics->AddConstraintP2P(*HeadBody, *PeakBody, { 0.25f,0,0.25f }, { -0.25f,-0.3f,0 });
+	//App->physics->AddConstraintP2P(*HeadBody, *PeakBody, { 0.25f,0,0.25f }, { -0.25f,-0.3f,0 });
 
 	// -----------------------------------------------------------
 
@@ -73,7 +73,7 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 	Eye1Body = App->physics->AddBody((Eye1), 0.1);
 	Eye1Body->Freeze(true);
 
-	App->physics->AddConstraintP2P(*HeadBody, *Eye1Body, { 0.05f,0,0.05f }, { -0.05f,-0.10f,0 });
+	//App->physics->AddConstraintP2P(*HeadBody, *Eye1Body, { 0.05f,0,0.05f }, { -0.05f,-0.10f,0 });
 
 	// -----------------------------------------------------------
 
@@ -87,7 +87,7 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 	Eye2Body = App->physics->AddBody((Eye2), 0.1);
 	Eye2Body->Freeze(true);
 
-	App->physics->AddConstraintP2P(*HeadBody, *Eye2Body, { 0.05f,0,0.05f }, { -0.05f,-0.10f,0 });
+	//App->physics->AddConstraintP2P(*HeadBody, *Eye2Body, { 0.05f,0,0.05f }, { -0.05f,-0.10f,0 });
 
 	// -----------------------------------------------------------
 
@@ -101,7 +101,7 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 	CrestBody = App->physics->AddBody((Crest), 0.1);
 	CrestBody->Freeze(true);
 
-	App->physics->AddConstraintP2P(*HeadBody, *CrestBody, { 0.15f,0,0.15f }, { -0.15f,-0.20f,0 });
+	//App->physics->AddConstraintP2P(*HeadBody, *CrestBody, { 0.15f,0,0.15f }, { -0.15f,-0.20f,0 });
 
 	// -----------------------------------------------------------
 	Leg1.radius = 0.1;
@@ -113,7 +113,7 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 	Leg1Body = App->physics->AddBody(Leg1, 10);
 	Leg1Body->Freeze(true);
 
-	App->physics->AddConstraintP2P(*BodyBody, *Leg1Body, { -0.35f,-0.5f,-0.35f }, { +0.7f,0,0 });
+	//App->physics->AddConstraintP2P(*BodyBody, *Leg1Body, { -0.35f,-0.5f,-0.35f }, { +0.7f,0,0 });
 
 	// -----------------------------------------------------------
 
@@ -126,7 +126,7 @@ void Chicken::CreateChicken(const float x, const float y, const float z, ModuleS
 	Leg2Body = App->physics->AddBody(Leg2, 10);
 	Leg2Body->Freeze(true);
 
-	App->physics->AddConstraintP2P(*BodyBody, *Leg2Body, { +0.35f,-0.5f,-0.35f }, { 0.7f,0,0 });
+	//App->physics->AddConstraintP2P(*BodyBody, *Leg2Body, { +0.35f,-0.5f,-0.35f }, { 0.7f,0,0 });
 
 	// -----------------------------------------------------------
 

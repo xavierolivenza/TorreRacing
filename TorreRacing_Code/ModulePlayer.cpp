@@ -297,7 +297,7 @@ update_status ModulePlayer::Update(float dt)
 
 	if (freecam == false)
 	{
-		if ((App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) && (Vehicle_Velocity <= SPEED_LIMIT))
+		if ((App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) && (Vehicle_Velocity <= NORMAL_SPEED_LIMIT))
 		{
 			acceleration = MAX_ACCELERATION;
 		}
@@ -319,7 +319,7 @@ update_status ModulePlayer::Update(float dt)
 			break_timer.Start();
 		}
 
-		if ((App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) && (Vehicle_Velocity >= -SPEED_LIMIT))
+		if ((App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) && (Vehicle_Velocity >= -NORMAL_SPEED_LIMIT))
 		{
 			if (break_timer.Read() * 0.001 <= 3.0f)
 			{
@@ -389,7 +389,7 @@ update_status ModulePlayer::Update(float dt)
 		}
 
 		//Front dash
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) && (Vehicle_Velocity <= FRONT_DASH_SPEED_LIMIT))
 		{
 			vec3 ViewDirection = vec3(0.0f, 5.0f, 0.0f);
 			mat4x4 vehicle_trans;
@@ -456,10 +456,6 @@ update_status ModulePlayer::Update(float dt)
 	decimal_seconds = seconds_f - seconds_i;
 	miliseconds_i = decimal_seconds * 1000;
 
-
-
-	
-		//App->win->SetTitle(title.GetString());
 	p2SString title;
 	if (win == false)
 	{
