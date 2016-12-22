@@ -62,4 +62,12 @@ private:
 	Timer jump_coolddown;
 	
 	Timer break_timer;
+
+	int lowesttime_all_in_miliseconds = 0;
+	int lowesttime_miliseconds = 0;
+	int lowesttime_seconds = 0;
+	int lowesttime_min = 0;
+
+	bool first_best_time = true;
+
 };
