@@ -503,14 +503,14 @@ bool ModuleSceneIntro::Start()
 	Huge_Chicken_Eye1.size.y = 0.15 * HUGE_CHICKEN_SCALE;
 	Huge_Chicken_Eye1.size.z = 0.15 * HUGE_CHICKEN_SCALE;
 	Huge_Chicken_Eye1.color = Black;
-	Huge_Chicken_Eye1.SetPos(x + 1 * HUGE_CHICKEN_SCALE, y + 0.80 * HUGE_CHICKEN_SCALE, z - 0.25 * HUGE_CHICKEN_SCALE);
+	Huge_Chicken_Eye1.SetPos(x + 1 * HUGE_CHICKEN_SCALE, y + 0.80 * HUGE_CHICKEN_SCALE, z - 0.3 * HUGE_CHICKEN_SCALE);
 	Huge_Chicken_Eye1.SetRotation(0, { 0,1,0 });
 	// -----------------------------------------------------------
 	Huge_Chicken_Eye2.size.x = 0.15 * HUGE_CHICKEN_SCALE;
 	Huge_Chicken_Eye2.size.y = 0.15 * HUGE_CHICKEN_SCALE;
 	Huge_Chicken_Eye2.size.z = 0.15 * HUGE_CHICKEN_SCALE;
 	Huge_Chicken_Eye2.color = Black;
-	Huge_Chicken_Eye2.SetPos(x + 1 * HUGE_CHICKEN_SCALE, y + 0.80 * HUGE_CHICKEN_SCALE, z + 0.25 * HUGE_CHICKEN_SCALE);
+	Huge_Chicken_Eye2.SetPos(x + 1 * HUGE_CHICKEN_SCALE, y + 0.80 * HUGE_CHICKEN_SCALE, z + 0.3 * HUGE_CHICKEN_SCALE);
 	Huge_Chicken_Eye2.SetRotation(0, { 0,1,0 });
 	// -----------------------------------------------------------
 	Huge_Chicken_Crest.size.x = 0.4 * HUGE_CHICKEN_SCALE;
