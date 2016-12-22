@@ -274,12 +274,12 @@ update_status ModulePlayer::Update(float dt)
 		vehicle->SetPos(-365.64, 12, -905);
 	}
 	//Final line
-	if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
 	{
 		vehicle->SetPos(-488.14, 12, -590);
 	}
 	//End
-	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
 	{
 		vehicle->SetPos(-488.14, 0, -310);
 	}
