@@ -45,8 +45,8 @@ public:
 	float brake;
 
 	uint Cow_fx;
-	uint Chicken_fx;
 	
+
 	Timer game_timer;
 	uint chickens_taken = 0;
 

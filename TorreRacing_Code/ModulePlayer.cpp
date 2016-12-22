@@ -22,7 +22,6 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	Cow_fx = App->audio->LoadFx("sounds/Cow_fx.wav");
-	Chicken_fx = App->audio->LoadFx("sounds/Chicken_fx.wav");
 
 	VehicleInfo car;
 

@@ -19,6 +19,10 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
+	uint Chicken_fx;
+	uint Win_fx;
+	uint Lose_fx;
+
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
 	void RestartChickens();//Function needded to keep chickens_dynamic_array private

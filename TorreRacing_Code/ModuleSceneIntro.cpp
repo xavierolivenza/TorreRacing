@@ -23,6 +23,10 @@ bool ModuleSceneIntro::Start()
 
 	App->audio->PlayMusic("music/main_theme.ogg");
 
+	Win_fx = App->audio->LoadFx("sounds/Win_fx.wav");
+	Chicken_fx = App->audio->LoadFx("sounds/Chicken_fx.wav");
+	Lose_fx = App->audio->LoadFx("sounds/Lose_fx.wav");
+
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
@@ -599,6 +603,10 @@ update_status ModuleSceneIntro::Update(float dt)
 	}
 
 	vec3 VehiclePos = App->player->vehicle->GetPos();
+	if (VehiclePos.y <= -2)
+	{
+		App->audio->PlayFx(Lose_fx);
+	}
 
 	if (VehiclePos.y <= - 100)
 	{
@@ -624,9 +632,12 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		}
 		if (((body1 == barn_sensorbody) || (body2 == barn_sensorbody)) && (first_time_barn_sensor == true))
 		{
+
+			App->audio->PlayFx(Win_fx);
 			App->player->game_timer.Stop();
 			App->player->win = true;
 			first_time_barn_sensor = false;
+
 		}
 		//Barn death sensor
 		if ((body1 == DeathSensorbody) || (body2 == DeathSensorbody))
@@ -645,7 +656,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 				if (chickens_dynamic_array[i]->firsttime == true)
 				{
 					chickens_dynamic_array[i]->ActivateChicken();
-					App->audio->PlayFx(App->player->Chicken_fx);
+					App->audio->PlayFx(Chicken_fx);
 					App->player->chickens_taken++;
 					chickens_dynamic_array[i]->firsttime = false;
 				}
