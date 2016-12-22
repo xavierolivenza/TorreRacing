@@ -671,12 +671,13 @@ update_status ModuleSceneIntro::Update(float dt)
 	Huge_Chicken_Leg2.Render();
 
 	vec3 VehiclePos = App->player->vehicle->GetPos();
+
 	if (VehiclePos.y <= -5)
 	{
 		App->audio->PlayFx(Lose_fx);
 	}
 
-	if (VehiclePos.y <= - 100)
+	if (VehiclePos.y <= - 200)
 	{
 		App->player->RestartGame();
 	}
