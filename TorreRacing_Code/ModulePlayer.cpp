@@ -5,6 +5,7 @@
 #include "PhysVehicle3D.h"
 #include "PhysBody3D.h"
 #include "ModuleAudio.h"
+#include "p2SString.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
@@ -291,10 +292,11 @@ update_status ModulePlayer::Update(float dt)
 		freecam = !freecam;
 	}
 
+	float Vehicle_Velocity = 0;
+	Vehicle_Velocity = App->player->vehicle->GetKmh();
+
 	if (freecam == false)
 	{
-		int Vehicle_Velocity = App->player->vehicle->GetKmh();
-
 		if ((App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) && (Vehicle_Velocity <= SPEED_LIMIT))
 		{
 			acceleration = MAX_ACCELERATION;
@@ -415,7 +417,7 @@ update_status ModulePlayer::Update(float dt)
 		//Jump
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			
+
 			if ((jump_coolddown.Read() * 0.001) >= JUMP_COOLDOWN)
 			{
 				vehicle->Push(0.0f, JUMP_IMPULSE, 0.0f);
@@ -454,17 +456,40 @@ update_status ModulePlayer::Update(float dt)
 	decimal_seconds = seconds_f - seconds_i;
 	miliseconds_i = decimal_seconds * 1000;
 
-	char title[80];
+
+
+	
+		//App->win->SetTitle(title.GetString());
+	p2SString title;
 	if (win == false)
 	{
-		sprintf_s(title, "TorreRacing, Time: %i:%2.i:%4.i Vehicle velocity: %4.1f Km/h, JumpCooldown: %.2f", minutes_i, seconds_i, miliseconds_i, vehicle->GetKmh(), jump_cooldown_calc);
+		vec3 VehiclePos = vehicle->GetPos();
+		title.create("TorreRacing, Time: %i:%i:%i Velocity %.2f JumpCooldown: %.2f Pos x:%.2f y:%.2f z:%.2f",
+			minutes_i, seconds_i, miliseconds_i,
+			Vehicle_Velocity,
+			jump_cooldown_calc,
+			VehiclePos.x, VehiclePos.y, VehiclePos.z);
+	}
+	else
+	{
+		title.create("TorreRacing, You won with a time of %i:%2.i:%4.i. Press R to restart", 
+			minutes_i, seconds_i, miliseconds_i);
+	}
+	App->window->SetTitle(title.GetString());
+
+	/*
+	char title[100];
+	if (win == false)
+	{
+		vec3 VehiclePos = vehicle->GetPos();
+		sprintf_s(title, "TorreRacing, Time: %i:%i:%i Velocity %.2f JumpCooldown: %.2f Pos x:%.2f y:%.2f z:%.2f", minutes_i, seconds_i, miliseconds_i, Vehicle_Velocity, jump_cooldown_calc, VehiclePos.x, VehiclePos.y, VehiclePos.z);
 	}
 	else
 	{
 		sprintf_s(title, "TorreRacing, You won with a time of %i:%2.i:%4.i. Press R to restart", minutes_i, seconds_i, miliseconds_i);
 	}
 	App->window->SetTitle(title);
-
+	*/
 	return UPDATE_CONTINUE;
 }
 
