@@ -460,17 +460,19 @@ update_status ModulePlayer::Update(float dt)
 	if (win == false)
 	{
 		vec3 VehiclePos = vehicle->GetPos();
-		title.create("TorreRacing, Time: %i:%i:%i Velocity %.2f JumpCooldown: %.2f Lowest Time: %i:%i:%i Pos x:%.2f y:%.2f z:%.2f",
+		title.create("TorreRacing, Time: %i:%i:%i Velocity %.2f JumpCooldown: %.2f Run down chickens: %i Lowest Time: %i:%i:%i Pos x:%.2f y:%.2f z:%.2f",
 			minutes_i, seconds_i, miliseconds_i,
 			Vehicle_Velocity,
 			jump_cooldown_calc,
+			chickens_taken,
 			lowesttime_min, lowesttime_seconds,lowesttime_miliseconds,
 			VehiclePos.x, VehiclePos.y, VehiclePos.z);
 	}
 	else
 	{
-		title.create("TorreRacing, You won with a time of %i:%2.i:%4.i. Lowest Time: %i:%i:%i. Press R to restart", 
+		title.create("TorreRacing, You won with a time of %i:%i:%i. Run down chickens: %i. Lowest Time: %i:%i:%i. Press R to restart", 
 			minutes_i, seconds_i, miliseconds_i,
+			chickens_taken,
 			lowesttime_min, lowesttime_seconds, lowesttime_miliseconds);
 
 		if ((tiemr_milisec_read < lowesttime_all_in_miliseconds) || (first_best_time == true))
@@ -497,6 +499,7 @@ update_status ModulePlayer::Update(float dt)
 	}
 	App->window->SetTitle(title);
 	*/
+
 	return UPDATE_CONTINUE;
 }
 
