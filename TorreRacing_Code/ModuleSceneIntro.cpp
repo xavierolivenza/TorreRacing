@@ -467,6 +467,64 @@ bool ModuleSceneIntro::Start()
 	chickens_dynamic_array.PushBack(new Chicken( -488.14, CHICKEN_Y_FLOOR, -400.5, this));
 	//--------------------------------------------//
 
+	//Huge chicken
+	int x = -390.64;
+	int y = 0;
+	int z = -700;
+
+	Huge_Chicken_Body.size.x = 1.5 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Body.size.y = 1 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Body.size.z = 1 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Body.color = White;
+	Huge_Chicken_Body.SetPos(x, y, z);
+	Huge_Chicken_Body.SetRotation(0, { 0,1,0 });
+	// -----------------------------------------------------------
+	Huge_Chicken_Head.size.x = 0.75 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Head.size.y = 1 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Head.size.z = 0.5 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Head.color = White;
+	Huge_Chicken_Head.SetPos(x + 0.75 * HUGE_CHICKEN_SCALE, y + 0.75 * HUGE_CHICKEN_SCALE, z);
+	Huge_Chicken_Head.SetRotation(0, { 0,1,0 });
+	// -----------------------------------------------------------
+	Huge_Chicken_Peak.radius = 0.1 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Peak.height = 0.75 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Peak.color = Yellow;
+	Huge_Chicken_Peak.SetPos(x + 1.3 * HUGE_CHICKEN_SCALE, y + 0.55 * HUGE_CHICKEN_SCALE, z);
+	Huge_Chicken_Peak.SetRotation(90, { 1,0,0 });
+	// -----------------------------------------------------------
+	Huge_Chicken_Eye1.size.x = 0.15 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Eye1.size.y = 0.15 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Eye1.size.z = 0.15 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Eye1.color = Black;
+	Huge_Chicken_Eye1.SetPos(x + 1 * HUGE_CHICKEN_SCALE, y + 0.80 * HUGE_CHICKEN_SCALE, z - 0.25 * HUGE_CHICKEN_SCALE);
+	Huge_Chicken_Eye1.SetRotation(0, { 0,1,0 });
+	// -----------------------------------------------------------
+	Huge_Chicken_Eye2.size.x = 0.15 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Eye2.size.y = 0.15 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Eye2.size.z = 0.15 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Eye2.color = Black;
+	Huge_Chicken_Eye2.SetPos(x + 1 * HUGE_CHICKEN_SCALE, y + 0.80 * HUGE_CHICKEN_SCALE, z + 0.25 * HUGE_CHICKEN_SCALE);
+	Huge_Chicken_Eye2.SetRotation(0, { 0,1,0 });
+	// -----------------------------------------------------------
+	Huge_Chicken_Crest.size.x = 0.4 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Crest.size.y = 0.5 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Crest.size.z = 0.1 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Crest.color = Red;
+	Huge_Chicken_Crest.SetPos(x + 0.75 * HUGE_CHICKEN_SCALE, y + 1.25 * HUGE_CHICKEN_SCALE, z);
+	Huge_Chicken_Crest.SetRotation(0, { 0,1,0 });
+	// -----------------------------------------------------------
+	Huge_Chicken_Leg1.radius = 0.1 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Leg1.height = 0.75 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Leg1.color = Yellow;
+	Huge_Chicken_Leg1.SetPos(x, y - 0.75 * HUGE_CHICKEN_SCALE, z - 0.3 * HUGE_CHICKEN_SCALE);
+	Huge_Chicken_Leg1.SetRotation(90, { 0,0,1 });
+	// -----------------------------------------------------------
+	Huge_Chicken_Leg2.radius = 0.1 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Leg2.height = 0.75 * HUGE_CHICKEN_SCALE;
+	Huge_Chicken_Leg2.color = Yellow;
+	Huge_Chicken_Leg2.SetPos(x, y - 0.75 * HUGE_CHICKEN_SCALE, z + 0.3 * HUGE_CHICKEN_SCALE);
+	Huge_Chicken_Leg2.SetRotation(90, { 0,0,1 });
+
 	return ret;
 }
 
@@ -602,8 +660,18 @@ update_status ModuleSceneIntro::Update(float dt)
 		chickens_dynamic_array[i]->RenderChicken();
 	}
 
+	//Huge chicken render
+	Huge_Chicken_Body.Render();
+	Huge_Chicken_Head.Render();
+	Huge_Chicken_Peak.Render();
+	Huge_Chicken_Eye1.Render();
+	Huge_Chicken_Eye2.Render();
+	Huge_Chicken_Crest.Render();
+	Huge_Chicken_Leg1.Render();
+	Huge_Chicken_Leg2.Render();
+
 	vec3 VehiclePos = App->player->vehicle->GetPos();
-	if (VehiclePos.y <= -2)
+	if (VehiclePos.y <= -5)
 	{
 		App->audio->PlayFx(Lose_fx);
 	}

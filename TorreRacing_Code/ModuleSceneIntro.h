@@ -5,6 +5,8 @@
 #include "Primitive.h"
 #include "Chicken.h"
 
+#define HUGE_CHICKEN_SCALE 50.0f
+
 struct PhysBody3D;
 struct PhysMotor3D;
 class Chicken;
@@ -220,7 +222,17 @@ private:
 	//--------------------------------------------//
 	p2DynArray<Chicken*> chickens_dynamic_array;
 	//--------------------------------------------//
-	
+
+	//Huge chicken
+	Cube Huge_Chicken_Body;
+	Cube Huge_Chicken_Head;
+	Cylinder Huge_Chicken_Peak;
+	Cube Huge_Chicken_Eye1;
+	Cube Huge_Chicken_Eye2;
+	Cube Huge_Chicken_Crest;
+	Cylinder Huge_Chicken_Leg1;
+	Cylinder Huge_Chicken_Leg2;
+
 public:
 
 	bool first_time_start_sensor = true;
