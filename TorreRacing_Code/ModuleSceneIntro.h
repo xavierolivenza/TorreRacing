@@ -5,7 +5,7 @@
 #include "Primitive.h"
 #include "Chicken.h"
 
-#define HUGE_CHICKEN_SCALE 50.0f
+#define HUGE_CHICKEN_SCALE 70.0f
 
 struct PhysBody3D;
 struct PhysMotor3D;

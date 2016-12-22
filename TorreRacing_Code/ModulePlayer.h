@@ -50,8 +50,11 @@ public:
 	Timer game_timer;
 	uint chickens_taken = 0;
 
+	Timer death_timer;
+
 	bool freecam = false;
 	bool win = false;
+	bool fall = false;
 
 private:
 

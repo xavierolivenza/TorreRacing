@@ -523,4 +523,7 @@ void ModulePlayer::RestartGame()
 	App->scene_intro->RestartChickens();
 	chickens_taken = 0;
 	win = false;
+	fall = false;
+	death_timer.Start();
+	death_timer.Stop();
 }

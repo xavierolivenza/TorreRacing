@@ -468,8 +468,8 @@ bool ModuleSceneIntro::Start()
 	//--------------------------------------------//
 
 	//Huge chicken
-	int x = -390.64;
-	int y = 0;
+	int x = -400;
+	int y = -20;
 	int z = -700;
 
 	Huge_Chicken_Body.size.x = 1.5 * HUGE_CHICKEN_SCALE;
@@ -674,12 +674,17 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	if (VehiclePos.y <= -5)
 	{
-		App->audio->PlayFx(Lose_fx);
-	}
+		if (App->player->fall == false)
+		{
+			App->player->death_timer.Start();
+			App->player->fall = true;
+		}
 
-	if (VehiclePos.y <= - 200)
-	{
-		App->player->RestartGame();
+		App->audio->PlayFx(Lose_fx);
+
+		if (App->player->death_timer.Read() >= 5250) {
+			App->player->RestartGame();
+		}
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
